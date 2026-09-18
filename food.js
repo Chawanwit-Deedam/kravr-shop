@@ -351,21 +351,39 @@
   function closeCheckout() { modal.setAttribute("aria-hidden", "true"); document.body.classList.remove("no-scroll"); clearInterval(trackTimer); trackTimer = null; }
   $("[data-checkout]").addEventListener("click", openCheckout);
   document.querySelectorAll("[data-close-checkout]").forEach((b) => b.addEventListener("click", closeCheckout));
+  function saveActiveOrder(o) { try { localStorage.setItem("kravr-eats-order", JSON.stringify(o)); } catch (e) {} }
+  function loadActiveOrder() { try { return JSON.parse(localStorage.getItem("kravr-eats-order")); } catch (e) { return null; } }
+  function showTracking(order) {
+    $("[data-order-no]").textContent = order.no;
+    $("[data-order-total]").textContent = baht(order.total);
+    stepForm.hidden = true; coFoot.style.display = "none"; stepSuccess.hidden = false;
+    modal.setAttribute("aria-hidden", "false"); document.body.classList.add("no-scroll");
+    modal.querySelector(".modal__card").scrollTop = 0;
+    startTracking(order);
+  }
   function placeOrder() {
     if (!coForm.reportValidity()) return;
-    const fd = new FormData(coForm);
-    const addr = (fd.get("address") || "").toString().trim();
-    const total = subtotal() + shipFee();
-    $("[data-order-no]").textContent = "#EAT-" + String(Math.floor(100000 + Math.random() * 900000));
-    $("[data-order-total]").textContent = baht(total);
+    const addr = (new FormData(coForm).get("address") || "").toString().trim();
+    const order = {
+      no: "#EAT-" + String(Math.floor(100000 + Math.random() * 900000)),
+      total: subtotal() + shipFee(),
+      addr: addr ? (addr.length > 30 ? addr.slice(0, 30) + "…" : addr) : "ที่อยู่ของคุณ",
+      placedAt: Date.now(),
+    };
+    saveActiveOrder(order);
     cart = {}; saveCart(); renderCart();
-    stepForm.hidden = true; coFoot.style.display = "none"; stepSuccess.hidden = false;
-    modal.querySelector(".modal__card").scrollTop = 0;
-    startTracking({ addr: addr ? (addr.length > 30 ? addr.slice(0, 30) + "…" : addr) : "ที่อยู่ของคุณ" });
+    showTracking(order);
     launchConfetti();
+  }
+  function openTracking() {
+    const order = loadActiveOrder();
+    if (!order) { toast("", "ยังไม่มีออเดอร์ที่กำลังติดตาม", ""); return; }
+    if (cartEl.classList.contains("is-open")) closeCart();
+    showTracking(order);
   }
   $("[data-place-order]").addEventListener("click", placeOrder);
   coForm.addEventListener("submit", (e) => { e.preventDefault(); placeOrder(); });
+  document.querySelectorAll("[data-open-tracking]").forEach((b) => b.addEventListener("click", openTracking));
 
   /* ---------- Delivery tracking (simulated, GrabFood-style) ---------- */
   let trackTimer = null;
@@ -385,7 +403,7 @@
     const len = routeGeo.getTotalLength();
     routeDone.style.strokeDasharray = String(len);
     routeDone.style.strokeDashoffset = String(len);
-    const t0 = Date.now();
+    const t0 = order.placedAt || Date.now();
     const riderT = (e) => e <= MOVE_START ? 0 : e >= MOVE_END ? 1 : (e - MOVE_START) / (MOVE_END - MOVE_START);
     const activeStage = (e) => { let s = 0; for (let i = 0; i < STAGES.length; i++) if (e >= STAGES[i].at) s = i; return s; };
     function renderSteps(active) {
