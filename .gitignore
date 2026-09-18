@@ -1,0 +1,14 @@
+# Dependencies (none currently, but ignore if added)
+node_modules/
+
+# Netlify local state
+.netlify/
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Local scratch / headless Chrome profiles
+chrome-ud/
+chrome-ud-*/

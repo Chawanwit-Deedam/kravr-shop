@@ -1,0 +1,17 @@
+{
+  "doctype-first": true,
+  "doctype-html5": true,
+  "html-lang-require": true,
+  "title-require": true,
+  "tagname-lowercase": true,
+  "tag-pair": true,
+  "tag-self-close": false,
+  "attr-lowercase": false,
+  "attr-value-double-quotes": true,
+  "attr-no-duplication": true,
+  "attr-unsafe-chars": true,
+  "spec-char-escape": true,
+  "id-unique": true,
+  "src-not-empty": true,
+  "alt-require": true
+}

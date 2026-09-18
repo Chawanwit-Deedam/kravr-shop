@@ -1,0 +1,18 @@
+# Netlify configuration
+# --------------------------------------------------------------------
+# Deploys are driven by Netlify's GitHub integration:
+#   push to main  -> production deploy
+#   pull request  -> deploy preview (URL posted as a PR comment)
+# Continuous Integration (HTMLHint) runs in GitHub Actions (.github/workflows/ci.yml).
+# Security headers are defined in the "_headers" file at the site root.
+
+[build]
+  publish = "."
+  # Static site — no build step needed.
+  command = ""
+
+[[redirects]]
+  # Single page — keep unknown paths on the site instead of a bare 404 host page.
+  from = "/*"
+  to = "/index.html"
+  status = 200

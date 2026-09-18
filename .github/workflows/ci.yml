@@ -1,0 +1,29 @@
+name: CI
+
+# Continuous Integration — runs on every push and pull request.
+# Deployment (CD) is handled by Netlify's GitHub integration:
+#   push to main -> production deploy · pull request -> deploy preview.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint & validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: HTMLHint
+        run: npx --yes htmlhint@1 "index.html"
