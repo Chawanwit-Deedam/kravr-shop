@@ -460,10 +460,89 @@
   document.querySelectorAll("[data-open-orders]").forEach((b) => b.addEventListener("click", openOrders));
   document.querySelectorAll("[data-close-orders]").forEach((b) => b.addEventListener("click", closeOrders));
 
+  /* ---------- Login / account (simulated) ---------- */
+  const DEMO_EMAIL = "demo@kravr.co", DEMO_PASS = "Kravr#2025";
+  const loginModal = $("[data-login-modal]"), loginView = $("[data-login-view]"), loginHeading = $("[data-login-heading]");
+  const accountBtn = $("[data-open-login]");
+  function loadUser() { try { return JSON.parse(localStorage.getItem("kravr-user")) || null; } catch (e) { return null; } }
+  function saveUser(u) { try { localStorage.setItem("kravr-user", JSON.stringify(u)); } catch (e) {} }
+  function clearUser() { try { localStorage.removeItem("kravr-user"); } catch (e) {} }
+  function personSVG() {
+    const s = document.createElementNS(SVGNS, "svg");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("width", "20"); s.setAttribute("height", "20"); s.setAttribute("aria-hidden", "true");
+    const c = document.createElementNS(SVGNS, "circle");
+    c.setAttribute("cx", "12"); c.setAttribute("cy", "8"); c.setAttribute("r", "3.6"); c.setAttribute("fill", "none"); c.setAttribute("stroke", "currentColor"); c.setAttribute("stroke-width", "1.7");
+    const p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", "M5.5 19.5a6.5 6.5 0 0 1 13 0"); p.setAttribute("fill", "none"); p.setAttribute("stroke", "currentColor"); p.setAttribute("stroke-width", "1.7"); p.setAttribute("stroke-linecap", "round");
+    s.append(c, p); return s;
+  }
+  function updateAccountBtn() {
+    const u = loadUser();
+    accountBtn.classList.toggle("is-auth", !!u);
+    accountBtn.setAttribute("aria-label", u ? "บัญชีของ " + u.name : "บัญชีของฉัน / เข้าสู่ระบบ");
+    accountBtn.replaceChildren(u ? el("span", { class: "account-btn__ini", text: u.initial }) : personSVG());
+  }
+  function loginForm() {
+    const email = el("input", { type: "email", name: "email", autocomplete: "username", placeholder: "you@email.com", required: true });
+    const pass = el("input", { type: "password", name: "password", autocomplete: "current-password", placeholder: "รหัสผ่าน", required: true });
+    const err = el("p", { class: "auth-error", hidden: true, role: "alert" });
+    const form = el("form", { class: "auth-form", novalidate: true }, [
+      el("label", { class: "field" }, [el("span", { text: "อีเมล" }), email]),
+      el("label", { class: "field" }, [el("span", { text: "รหัสผ่าน" }), pass]),
+      el("label", { class: "auth-remember" }, [el("input", { type: "checkbox", name: "remember", checked: true }), el("span", { text: "จดจำฉันไว้ในระบบ" })]),
+      err,
+      el("button", { class: "btn btn--block btn--lg", type: "submit", text: "เข้าสู่ระบบ" }),
+    ]);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      if (email.value.trim().toLowerCase() === DEMO_EMAIL && pass.value === DEMO_PASS) {
+        saveUser({ name: "คุณเดโม", email: DEMO_EMAIL, initial: "D" });
+        updateAccountBtn(); renderLogin();
+        toast("", "ยินดีต้อนรับ, คุณเดโม", "", true);
+        setTimeout(closeLogin, 900);
+      } else {
+        err.textContent = "อีเมลหรือรหัสผ่านไม่ถูกต้อง — ลองใช้บัญชีเดโมด้านล่าง"; err.hidden = false;
+      }
+    });
+    const demo = el("div", { class: "auth-demo" }, [
+      el("p", { class: "auth-demo__t", text: "บัญชีสำหรับทดลอง (เดโม)" }),
+      el("div", { class: "auth-demo__row" }, [el("span", { text: "อีเมล" }), el("code", { text: DEMO_EMAIL })]),
+      el("div", { class: "auth-demo__row" }, [el("span", { text: "รหัสผ่าน" }), el("code", { text: DEMO_PASS })]),
+      el("button", { class: "auth-demo__fill", type: "button", text: "กรอกให้อัตโนมัติ", on: { click: () => { email.value = DEMO_EMAIL; pass.value = DEMO_PASS; err.hidden = true; } } }),
+    ]);
+    const note = el("p", { class: "auth-note", text: "ระบบล็อกอินนี้เป็นการจำลองสำหรับเดโม — ไม่มีการส่งหรือบันทึกข้อมูลไปยังเซิร์ฟเวอร์จริง" });
+    return el("div", {}, [form, demo, note]);
+  }
+  function accountPanel(u) {
+    return el("div", { class: "account" }, [
+      el("div", { class: "account__avatar", "aria-hidden": "true", text: u.initial }),
+      el("p", { class: "account__name", text: u.name }),
+      el("p", { class: "account__email", text: u.email }),
+      el("button", { class: "btn btn--block btn--lg", type: "button", text: "คำสั่งซื้อของฉัน", on: { click: () => { closeLogin(); openOrders(); } } }),
+      el("button", { class: "btn btn--soft btn--block", type: "button", text: "ออกจากระบบ", on: { click: () => { clearUser(); updateAccountBtn(); renderLogin(); toast("", "ออกจากระบบแล้ว", ""); } } }),
+    ]);
+  }
+  function renderLogin() {
+    const u = loadUser();
+    loginHeading.textContent = u ? "บัญชีของฉัน" : "เข้าสู่ระบบ";
+    loginView.replaceChildren(u ? accountPanel(u) : loginForm());
+  }
+  function openLogin() { if (cartEl.classList.contains("is-open")) closeCart(); renderLogin(); loginModal.setAttribute("aria-hidden", "false"); document.body.classList.add("no-scroll"); }
+  function closeLogin() { loginModal.setAttribute("aria-hidden", "true"); document.body.classList.remove("no-scroll"); }
+  accountBtn.addEventListener("click", openLogin);
+  document.querySelectorAll("[data-close-login]").forEach((b) => b.addEventListener("click", closeLogin));
+  updateAccountBtn();
+
   /* ---------- Toast / Confetti / Search / Theme ---------- */
   const toastEl = $("[data-toast]"); let toastTimer = null;
   function toast(prefix, strongText, suffix, withIcon) {
-    toastEl.replaceChildren(withIcon ? svgIcon("check") : null, prefix ? document.createTextNode(prefix + " ") : null, strongText ? el("strong", { text: strongText }) : null, suffix ? document.createTextNode(" " + suffix) : null);
+    const parts = [];
+    if (withIcon) parts.push(svgIcon("check"));
+    if (prefix) parts.push(document.createTextNode(prefix + " "));
+    if (strongText) parts.push(el("strong", { text: strongText }));
+    if (suffix) parts.push(document.createTextNode(" " + suffix));
+    toastEl.replaceChildren(...parts);
     toastEl.hidden = false; requestAnimationFrame(() => toastEl.classList.add("is-show"));
     clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.classList.remove("is-show"); setTimeout(() => { toastEl.hidden = true; }, 300); }, 1900);
   }
@@ -484,6 +563,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     if (detailModal.getAttribute("aria-hidden") === "false") closeDetail();
+    else if (loginModal.getAttribute("aria-hidden") === "false") closeLogin();
     else if (ordersModal.getAttribute("aria-hidden") === "false") closeOrders();
     else if (modal.getAttribute("aria-hidden") === "false") closeCheckout();
     else if (cartEl.classList.contains("is-open")) closeCart();

@@ -53,6 +53,9 @@
           <svg class="ic-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="ic-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </button>
+        <button class="icon-btn account-btn" type="button" data-open-login aria-label="บัญชีของฉัน / เข้าสู่ระบบ">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
         <button class="icon-btn" type="button" data-open-orders aria-label="คำสั่งซื้อของฉัน">
           <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-3-1.8-3 1.8-3-1.8-3 1.8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.5h6M9 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
@@ -195,6 +198,20 @@
   <div class="modal" data-detail-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="detail-title">
     <div class="modal__backdrop" data-close-detail></div>
     <div class="modal__card detail" data-detail-content></div>
+  </div>
+
+  <!-- Login / account modal (simulated) -->
+  <div class="modal" data-login-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="modal__backdrop" data-close-login></div>
+    <div class="modal__card modal__card--sm">
+      <div class="modal__head">
+        <h2 id="login-title" data-login-heading>เข้าสู่ระบบ</h2>
+        <button class="icon-btn" type="button" data-close-login aria-label="ปิด">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div data-login-view></div>
+    </div>
   </div>
 
   <!-- My Orders modal -->
