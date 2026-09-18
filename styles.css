@@ -279,6 +279,49 @@ svg { display: block; }
 :root[data-theme="dark"] .account-btn.is-auth { background: var(--accent); border-color: var(--accent); color: #fff; }
 .account-btn__ini { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; }
 
+/* Auth pages (login + hub) */
+.auth-page { min-height: 100vh; min-height: 100dvh; position: relative; overflow-x: hidden; }
+.auth-page::before, .auth-page::after { content: ""; position: fixed; border-radius: 50%; filter: blur(70px); opacity: 0.5; z-index: 0; pointer-events: none; }
+.auth-page::before { width: 340px; height: 340px; background: radial-gradient(circle, var(--accent-soft), transparent 70%); top: -80px; right: -60px; }
+.auth-page::after { width: 300px; height: 300px; background: radial-gradient(circle, #e9e2ff, transparent 70%); bottom: -80px; left: -70px; }
+:root[data-theme="dark"] .auth-page::after { background: radial-gradient(circle, rgba(120,90,220,0.25), transparent 70%); }
+.auth-page__theme { position: fixed; top: 16px; right: 16px; z-index: 5; background: var(--surface); }
+.auth-shell { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; }
+.auth-card { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow-lg); padding: clamp(24px, 5vw, 36px); }
+.auth-brand { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.auth-brand .brand__mark { width: 36px; height: 36px; border-radius: 10px; background: var(--ink); color: #fff; display: grid; place-items: center; }
+.auth-brand .brand__mark svg { width: 21px; height: 21px; }
+.auth-brand__name { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.01em; }
+.auth-title { text-align: center; font-size: 1.6rem; }
+.auth-sub { text-align: center; color: var(--dim); margin: 6px 0 22px; }
+.auth-form .field span { font-weight: 500; }
+.auth-page__theme .ic-sun { display: none; } .auth-page__theme .ic-moon { display: block; }
+:root[data-theme="dark"] .auth-page__theme .ic-sun { display: block; } :root[data-theme="dark"] .auth-page__theme .ic-moon { display: none; }
+
+/* Hub / chooser */
+.hub { width: 100%; max-width: 760px; }
+.hub__head { text-align: center; margin-bottom: 26px; }
+.hub__hi { color: var(--dim); }
+.hub__hi strong { color: var(--ink); font-family: var(--font-head); }
+.hub__title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 6px 0 4px; }
+.hub__sub { color: var(--dim); }
+.hub__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.hub-card { position: relative; display: flex; flex-direction: column; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px; box-shadow: var(--shadow); transition: transform 0.25s var(--ease), box-shadow 0.25s, border-color 0.25s; overflow: hidden; }
+.hub-card::after { content: ""; position: absolute; inset: 0 0 auto auto; width: 150px; height: 150px; border-radius: 50%; background: var(--hub); opacity: 0.10; transform: translate(40%, -40%); }
+.hub-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--hub); }
+.hub-card__ic { width: 56px; height: 56px; border-radius: 16px; background: var(--hub-soft); color: var(--hub); display: grid; place-items: center; position: relative; z-index: 1; }
+.hub-card__ic svg { width: 30px; height: 30px; }
+.hub-card__name { font-family: var(--font-head); font-weight: 700; font-size: 1.35rem; margin-top: 6px; position: relative; z-index: 1; }
+.hub-card__desc { color: var(--dim); font-size: 0.92rem; line-height: 1.6; position: relative; z-index: 1; }
+.hub-card__go { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-head); font-weight: 600; color: var(--hub); padding-top: 12px; position: relative; z-index: 1; }
+.hub-card--shop { --hub: #b4315a; --hub-soft: #fbeef2; }
+.hub-card--eats { --hub: #e8590c; --hub-soft: #fff1e6; }
+:root[data-theme="dark"] .hub-card--shop { --hub: #e0698a; --hub-soft: rgba(224,105,138,0.15); }
+:root[data-theme="dark"] .hub-card--eats { --hub: #ff922b; --hub-soft: rgba(255,146,43,0.15); }
+.hub__logout { display: block; margin: 26px auto 0; border: 1px solid var(--line); background: var(--surface); color: var(--dim); font-family: var(--font-head); font-weight: 500; font-size: 0.92rem; padding: 10px 22px; border-radius: 999px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.hub__logout:hover { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 560px) { .hub__grid { grid-template-columns: 1fr; } }
+
 /* Order tracking stepper */
 .stepper { display: grid; grid-template-columns: repeat(4, 1fr); margin: 18px 0 4px; }
 .step { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }

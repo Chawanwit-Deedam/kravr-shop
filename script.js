@@ -520,7 +520,7 @@
       el("p", { class: "account__name", text: u.name }),
       el("p", { class: "account__email", text: u.email }),
       el("button", { class: "btn btn--block btn--lg", type: "button", text: "คำสั่งซื้อของฉัน", on: { click: () => { closeLogin(); openOrders(); } } }),
-      el("button", { class: "btn btn--soft btn--block", type: "button", text: "ออกจากระบบ", on: { click: () => { clearUser(); updateAccountBtn(); renderLogin(); toast("", "ออกจากระบบแล้ว", ""); } } }),
+      el("button", { class: "btn btn--soft btn--block", type: "button", text: "ออกจากระบบ", on: { click: () => { clearUser(); location.replace("index.html"); } } }),
     ]);
   }
   function renderLogin() {

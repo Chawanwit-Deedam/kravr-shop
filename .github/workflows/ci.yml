@@ -26,4 +26,4 @@ jobs:
         with:
           node-version: 20
       - name: HTMLHint
-        run: npx --yes htmlhint@1 "index.html" "food.html"
+        run: npx --yes htmlhint@1 "index.html" "home.html" "shop.html" "food.html"

@@ -68,3 +68,56 @@
 @media (max-width: 640px) {
   .dish-reviews { padding: 20px 18px 22px; }
 }
+
+/* ---------- Delivery tracking (GrabFood-style) ---------- */
+.track { text-align: left; }
+.track__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.track__eta-label { color: var(--dim); font-size: 0.82rem; }
+.track__eta { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; color: var(--accent); }
+.track__pill { font-family: var(--font-head); font-weight: 600; font-size: 0.78rem; color: var(--accent); background: var(--accent-soft); padding: 6px 14px; border-radius: 999px; white-space: nowrap; }
+.track__pill.done { color: var(--ok); background: rgba(47,158,111,0.13); }
+
+.track__map { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 400 / 260; background: var(--surface-2); }
+.track__map svg { width: 100%; height: 100%; display: block; }
+.tm-bg { fill: #e8f0e8; }
+:root[data-theme="dark"] .tm-bg { fill: #20242a; }
+.tm-blocks rect { fill: #dde8dd; }
+:root[data-theme="dark"] .tm-blocks rect { fill: #2a2f36; }
+.tm-roads path { stroke: #ffffff; stroke-width: 9; stroke-linecap: round; fill: none; }
+:root[data-theme="dark"] .tm-roads path { stroke: #171a1f; }
+.route { fill: none; stroke: var(--mute); stroke-width: 3.5; stroke-linecap: round; opacity: 0.4; stroke-dasharray: 2 7; }
+.route-done { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; }
+.mk-store { fill: var(--ink); }
+.mk-home { fill: var(--accent); }
+.mk-ico { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.mk-pulse { fill: var(--accent); opacity: 0.4; transform-origin: center; animation: mkpulse 2s ease-out infinite; }
+@keyframes mkpulse { 0% { transform: scale(1); opacity: 0.4; } 70% { transform: scale(2.4); opacity: 0; } 100% { opacity: 0; } }
+.rider { transition: transform 0.95s linear; }
+.rider-dot { fill: var(--accent); stroke: #fff; stroke-width: 2; }
+.rider-ico { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.rider-card { display: flex; align-items: center; gap: 12px; background: var(--surface-2); border-radius: 16px; padding: 12px 14px; margin-top: 14px; }
+.rider-card__ava { width: 46px; height: 46px; border-radius: 50%; background: var(--surface); color: var(--accent); display: grid; place-items: center; flex: none; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.rider-card__ava svg { width: 26px; height: 26px; }
+.rider-card__info { flex: 1; min-width: 0; }
+.rider-card__name { font-family: var(--font-head); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.rider-card__rate { display: inline-flex; align-items: center; gap: 3px; color: var(--star); font-size: 0.85rem; font-weight: 600; }
+.rider-card__rate svg { width: 14px; height: 14px; }
+.rider-card__meta { color: var(--mute); font-size: 0.8rem; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rider-card__actions { display: flex; gap: 8px; flex: none; }
+.rider-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--accent); cursor: pointer; display: grid; place-items: center; transition: background 0.2s; }
+.rider-btn:hover { background: var(--accent-soft); }
+.rider-btn svg { width: 19px; height: 19px; }
+
+.track-steps { list-style: none; margin: 18px 0 6px; padding: 0; }
+.track-steps li { position: relative; padding: 0 0 16px 30px; color: var(--mute); font-size: 0.9rem; }
+.track-steps li:last-child { padding-bottom: 0; }
+.track-steps li::before { content: ""; position: absolute; left: 7px; top: 16px; bottom: -2px; width: 2px; background: var(--line); }
+.track-steps li:last-child::before { display: none; }
+.track-steps li::after { content: ""; position: absolute; left: 0; top: 2px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); }
+.track-steps li.done { color: var(--ink); }
+.track-steps li.done::before { background: var(--accent); }
+.track-steps li.done::after { border-color: var(--accent); background: var(--accent); }
+.track-steps li.active { color: var(--ink); font-family: var(--font-head); font-weight: 600; }
+.track-steps li.active::after { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.track-steps li small { display: block; color: var(--mute); font-weight: 400; font-size: 0.78rem; font-family: var(--font); margin-top: 1px; }

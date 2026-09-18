@@ -348,23 +348,66 @@
     $("[data-co-total]").textContent = baht(subtotal() + shipFee());
     modal.setAttribute("aria-hidden", "false"); document.body.classList.add("no-scroll");
   }
-  function closeCheckout() { modal.setAttribute("aria-hidden", "true"); document.body.classList.remove("no-scroll"); }
+  function closeCheckout() { modal.setAttribute("aria-hidden", "true"); document.body.classList.remove("no-scroll"); clearInterval(trackTimer); trackTimer = null; }
   $("[data-checkout]").addEventListener("click", openCheckout);
   document.querySelectorAll("[data-close-checkout]").forEach((b) => b.addEventListener("click", closeCheckout));
   function placeOrder() {
     if (!coForm.reportValidity()) return;
-    const name = (new FormData(coForm).get("name") || "").toString().trim();
+    const fd = new FormData(coForm);
+    const addr = (fd.get("address") || "").toString().trim();
     const total = subtotal() + shipFee();
-    $("[data-success-msg]").textContent = (name ? "ขอบคุณ " + name.split(" ")[0] + "! " : "") + "ร้านได้รับออเดอร์แล้ว กำลังเตรียมอาหารให้คุณ";
     $("[data-order-no]").textContent = "#EAT-" + String(Math.floor(100000 + Math.random() * 900000));
     $("[data-order-total]").textContent = baht(total);
     cart = {}; saveCart(); renderCart();
     stepForm.hidden = true; coFoot.style.display = "none"; stepSuccess.hidden = false;
     modal.querySelector(".modal__card").scrollTop = 0;
+    startTracking({ addr: addr ? (addr.length > 30 ? addr.slice(0, 30) + "…" : addr) : "ที่อยู่ของคุณ" });
     launchConfetti();
   }
   $("[data-place-order]").addEventListener("click", placeOrder);
   coForm.addEventListener("submit", (e) => { e.preventDefault(); placeOrder(); });
+
+  /* ---------- Delivery tracking (simulated, GrabFood-style) ---------- */
+  let trackTimer = null;
+  const STAGES = [
+    { label: "ร้านรับออเดอร์แล้ว", pill: "รับออเดอร์แล้ว", at: 0 },
+    { label: "กำลังปรุงอาหาร", pill: "กำลังปรุงอาหาร", at: 6 },
+    { label: "ไรเดอร์รับอาหารแล้ว", pill: "ไรเดอร์รับอาหาร", at: 16 },
+    { label: "กำลังจัดส่งถึงคุณ", pill: "กำลังจัดส่ง", at: 22 },
+    { label: "ถึงแล้ว — อร่อยนะ!", pill: "จัดส่งสำเร็จ", at: 52 },
+  ];
+  const TOTAL_T = 52, MOVE_START = 22, MOVE_END = 52;
+  document.querySelectorAll("[data-rider-action]").forEach((b) => b.addEventListener("click", () => toast("", "โหมดสาธิต — ติดต่อไรเดอร์ไม่ได้จริง", "")));
+  function startTracking(order) {
+    $("[data-order-addr]").textContent = order.addr;
+    const rider = $("[data-rider]"), routeGeo = $(".route"), routeDone = $("[data-route-done]");
+    const etaEl = $("[data-track-eta]"), pill = $("[data-track-status]"), stepsEl = $("[data-track-steps]");
+    const len = routeGeo.getTotalLength();
+    routeDone.style.strokeDasharray = String(len);
+    routeDone.style.strokeDashoffset = String(len);
+    const t0 = Date.now();
+    const riderT = (e) => e <= MOVE_START ? 0 : e >= MOVE_END ? 1 : (e - MOVE_START) / (MOVE_END - MOVE_START);
+    const activeStage = (e) => { let s = 0; for (let i = 0; i < STAGES.length; i++) if (e >= STAGES[i].at) s = i; return s; };
+    function renderSteps(active) {
+      stepsEl.replaceChildren(...STAGES.map((st, i) => {
+        const sub = i < active ? "เสร็จแล้ว" : i === active ? (i === STAGES.length - 1 ? "เรียบร้อย!" : "กำลังดำเนินการ…") : "";
+        return el("li", { class: i < active ? "done" : i === active ? "active" : "" }, [document.createTextNode(st.label), sub ? el("small", { text: sub }) : null]);
+      }));
+    }
+    function tick() {
+      const e = (Date.now() - t0) / 1000;
+      const t = riderT(e), pt = routeGeo.getPointAtLength(t * len);
+      rider.setAttribute("transform", "translate(" + pt.x.toFixed(1) + "," + pt.y.toFixed(1) + ")");
+      routeDone.style.strokeDashoffset = (len * (1 - t)).toFixed(1);
+      const active = activeStage(e), delivered = active >= STAGES.length - 1;
+      pill.textContent = STAGES[active].pill;
+      pill.classList.toggle("done", delivered);
+      etaEl.textContent = delivered ? "ถึงแล้ว" : Math.max(1, Math.round(28 * (1 - e / TOTAL_T))) + " นาที";
+      renderSteps(active);
+      if (delivered) { clearInterval(trackTimer); trackTimer = null; launchConfetti(); }
+    }
+    clearInterval(trackTimer); tick(); trackTimer = setInterval(tick, 1000);
+  }
 
   /* ---------- Toast / Confetti / Search / Theme ---------- */
   const toastEl = $("[data-toast]"); let toastTimer = null;

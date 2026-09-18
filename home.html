@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' 'sha256-mTJ4cJaTm2Gw95GeXEpZdvEEY9ybh6FZu1bwcNE7QlY=';
+                 style-src 'self' https://fonts.googleapis.com 'sha256-Ji1UslKBIeFAUjRU+6GY3Yak5Q/PdBpmBS4zdshiGfY=' 'sha256-94IHAwqZOHPP2ykTpic3GQDxOYct6jCHc4tEHx0JMi0=';
+                 font-src https://fonts.gstatic.com;
+                 img-src 'self' data:;
+                 connect-src 'self';
+                 base-uri 'self';
+                 form-action 'self';
+                 object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <title>Kravr — เลือกบริการ</title>
+  <meta name="description" content="เลือกบริการของ Kravr: ช้อปสินค้า หรือ สั่งอาหาร" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="theme-init.js"></script>
+  <script src="auth-guard.js"></script>
+  <script src="home.js" defer></script>
+</head>
+<body class="auth-page">
+  <button class="icon-btn auth-page__theme" type="button" data-theme-toggle aria-label="สลับโหมดสว่าง/มืด">
+    <svg class="ic-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <svg class="ic-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </button>
+
+  <main class="auth-shell">
+    <div class="hub">
+      <div class="hub__head">
+        <p class="hub__hi">สวัสดี, <strong data-user-name>คุณเดโม</strong> 👋</p>
+        <h1 class="hub__title">วันนี้อยากทำอะไรดี?</h1>
+        <p class="hub__sub">เลือกบริการที่ต้องการได้เลย</p>
+      </div>
+
+      <div class="hub__grid">
+        <a class="hub-card hub-card--shop" href="shop.html">
+          <span class="hub-card__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8h12l-.8 11.2A2 2 0 0 1 15.2 21H8.8a2 2 0 0 1-2-1.8L6 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="hub-card__name">ช้อปสินค้า</span>
+          <span class="hub-card__desc">Kravr Shop — แฟชั่น ความงาม แกดเจ็ต ของมันต้องมี</span>
+          <span class="hub-card__go">เข้าร้าน <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+
+        <a class="hub-card hub-card--eats" href="food.html">
+          <span class="hub-card__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v8a2 2 0 0 0 2 2v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.5 3v6M12 3v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 3c-1.5 0-2.2 1.6-2.2 4.5S15.5 13 17 13v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="hub-card__name">สั่งอาหาร</span>
+          <span class="hub-card__desc">Kravr Eats — จานเด็ดจากทั่วโลก ส่งถึงบ้าน พร้อมติดตามไรเดอร์</span>
+          <span class="hub-card__go">ดูเมนู <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+
+      <button class="hub__logout" type="button" data-logout>ออกจากระบบ</button>
+    </div>
+  </main>
+</body>
+</html>
