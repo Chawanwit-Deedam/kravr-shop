@@ -4,7 +4,7 @@
 # Products come from DummyJSON, so its API (connect-src) and image CDN
 # (img-src) are allowlisted; the two sha256 hashes cover Netlify's HUD widget.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-mTJ4cJaTm2Gw95GeXEpZdvEEY9ybh6FZu1bwcNE7QlY='; style-src 'self' https://fonts.googleapis.com 'sha256-Ji1UslKBIeFAUjRU+6GY3Yak5Q/PdBpmBS4zdshiGfY=' 'sha256-94IHAwqZOHPP2ykTpic3GQDxOYct6jCHc4tEHx0JMi0='; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.dummyjson.com; connect-src 'self' https://dummyjson.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-mTJ4cJaTm2Gw95GeXEpZdvEEY9ybh6FZu1bwcNE7QlY='; style-src 'self' https://fonts.googleapis.com 'sha256-Ji1UslKBIeFAUjRU+6GY3Yak5Q/PdBpmBS4zdshiGfY=' 'sha256-94IHAwqZOHPP2ykTpic3GQDxOYct6jCHc4tEHx0JMi0='; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.dummyjson.com https://www.themealdb.com; connect-src 'self' https://dummyjson.com https://www.themealdb.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

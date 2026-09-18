@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' 'sha256-mTJ4cJaTm2Gw95GeXEpZdvEEY9ybh6FZu1bwcNE7QlY=';
+                 style-src 'self' https://fonts.googleapis.com 'sha256-Ji1UslKBIeFAUjRU+6GY3Yak5Q/PdBpmBS4zdshiGfY=' 'sha256-94IHAwqZOHPP2ykTpic3GQDxOYct6jCHc4tEHx0JMi0=';
+                 font-src https://fonts.gstatic.com;
+                 img-src 'self' data: https://www.themealdb.com;
+                 connect-src 'self' https://www.themealdb.com;
+                 base-uri 'self';
+                 form-action 'self';
+                 object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <title>Kravr Eats — สั่งอาหารออนไลน์ ส่งถึงบ้าน</title>
+  <meta name="description" content="Kravr Eats สั่งอาหารจากเมนูจานเด็ดทั่วโลก รีวิวได้จริง ส่งถึงบ้าน (เว็บสาธิต look & feel — ไม่มีการชำระเงินจริง)" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="food.css" />
+  <script src="theme-init.js"></script>
+  <script src="food.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#menu">ข้ามไปยังเมนู</a>
+
+  <div class="demo-bar"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.2M12 7.8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>เว็บสาธิต (Demo) — การสั่งอาหารและชำระเงินเป็นการจำลอง <strong>ไม่มีการเก็บเงินจริง</strong> ไม่มีการจัดส่งจริง</div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="Kravr Eats หน้าแรก">
+        <span class="brand__mark brand__mark--eats" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M9.5 3v6M12 3v6M12 3v0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17 3c-1.5 0-2.2 1.6-2.2 4.5S15.5 13 17 13v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand__name">Kravr <span class="brand__eats">Eats</span></span>
+      </a>
+
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input type="search" id="search" placeholder="ค้นหาเมนูอาหาร…" aria-label="ค้นหาอาหาร" autocomplete="off" />
+      </div>
+
+      <div class="nav__actions">
+        <a class="icon-btn nav-link" href="index.html" aria-label="ไปที่ร้านช้อป Kravr" title="ร้านช้อป Kravr">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1 12a2 2 0 0 1-2 1.8H8A2 2 0 0 1 6 19L5 7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </a>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="สลับโหมดสว่าง/มืด">
+          <svg class="ic-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="ic-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="cart-btn" type="button" data-open-cart aria-label="เปิดตะกร้าอาหาร">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1 12a2 2 0 0 1-2 1.8H8A2 2 0 0 1 6 19L5 7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span class="cart-btn__badge" data-cart-count hidden>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__text hero__text--eats">
+        <span class="hero__eyebrow">หิวเมื่อไหร่ก็สั่งเลย</span>
+        <h1 class="hero__title">อร่อยจานเด็ด<br /><span class="grad">ส่งตรงถึงบ้าน</span></h1>
+        <p class="hero__sub">ส่งฟรีเมื่อสั่งครบ ฿300 · รีวิวจากคนกินจริง · พร้อมส่งใน 30 นาที</p>
+        <a class="btn btn--lg" href="#menu">ดูเมนูเลย</a>
+        <div class="hero__art hero__art--eats" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <circle class="ha-ring" cx="104" cy="100" r="84" />
+            <circle class="ha-disc" cx="104" cy="100" r="60" />
+            <circle class="ha-bag" cx="104" cy="98" r="34" />
+            <path class="ha-handle" d="M104 64c14 0 22 12 22 24" />
+            <path class="ha-spark" d="M150 58v18M141 67h18" />
+            <path class="ha-spark2" d="M58 128v14M51 135h14" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog" id="menu">
+      <div class="catalog__head">
+        <h2>เมนูทั้งหมด</h2>
+        <div class="filters" role="tablist" aria-label="หมวดหมู่อาหาร" data-filters></div>
+      </div>
+      <div class="products" data-grid aria-live="polite"></div>
+      <p class="empty-results" data-empty-results hidden>ไม่พบเมนูที่ตรงกับคำค้นหา — ลองคำอื่นดูอีกครั้งนะ</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><span class="footer__brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17 3c-1.5 0-2.2 1.6-2.2 4.5S15.5 13 17 13v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> <strong>Kravr Eats</strong></span> · อร่อยส่งถึงบ้าน · <a class="footer__link" href="index.html">ไปที่ร้านช้อป Kravr →</a></p>
+    <p class="footer__fine">งานสาธิตเพื่อการนำเสนอผลงาน — เมนู รูป ราคา และการชำระเงินเป็นการจำลองทั้งหมด ไม่มีธุรกรรมจริง (ข้อมูลเมนูจาก TheMealDB)</p>
+    <p>© <span data-year>2026</span> Kravr Eats Demo · Built by ธีร์</p>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div class="scrim" data-scrim hidden></div>
+  <aside class="cart" data-cart aria-label="ตะกร้าอาหาร" aria-hidden="true">
+    <div class="cart__head">
+      <h2>ตะกร้าของคุณ</h2>
+      <button class="icon-btn" type="button" data-close-cart aria-label="ปิดตะกร้า">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="ship-progress" data-ship-wrap>
+      <p data-ship-text></p>
+      <div class="ship-progress__bar"><span data-ship-bar></span></div>
+    </div>
+
+    <div class="cart__items" data-cart-items></div>
+
+    <div class="cart__empty" data-cart-empty>
+      <span aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l1.6 11.2A2 2 0 0 0 9.6 18h8.2a2 2 0 0 0 2-1.6L21 8H7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.3" fill="currentColor"/><circle cx="18" cy="21" r="1.3" fill="currentColor"/></svg></span>
+      <p>ยังไม่มีอาหารในตะกร้า</p>
+      <button class="btn btn--soft" type="button" data-close-cart>เลือกเมนูอาหาร</button>
+    </div>
+
+    <div class="cart__foot" data-cart-foot hidden>
+      <div class="cart__row"><span>ยอดรวม</span><strong data-cart-subtotal>฿0</strong></div>
+      <div class="cart__row cart__row--muted"><span>ค่าจัดส่ง</span><span data-cart-ship>—</span></div>
+      <div class="cart__row cart__row--total"><span>รวมทั้งหมด</span><strong data-cart-total>฿0</strong></div>
+      <button class="btn btn--block btn--lg" type="button" data-checkout>สั่งอาหารเลย</button>
+    </div>
+  </aside>
+
+  <!-- Checkout modal -->
+  <div class="modal" data-checkout-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <div class="modal__backdrop" data-close-checkout></div>
+    <div class="modal__card">
+      <div data-checkout-step="form">
+        <div class="modal__head">
+          <h2 id="co-title">สั่งอาหาร</h2>
+          <button class="icon-btn" type="button" data-close-checkout aria-label="ปิด">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <p class="modal__demo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>โหมดสาธิต — ข้อมูลไม่ถูกส่งหรือบันทึกที่ใด และไม่มีการเรียกเก็บเงิน</p>
+
+        <form data-checkout-form novalidate>
+          <fieldset class="field-group">
+            <legend>ที่อยู่จัดส่ง</legend>
+            <label class="field"><span>ชื่อผู้รับ</span><input type="text" name="name" autocomplete="name" placeholder="เช่น สมชาย ใจดี" required /></label>
+            <label class="field"><span>เบอร์โทร</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx" /></label>
+            <label class="field"><span>ที่อยู่จัดส่ง</span><textarea name="address" rows="2" autocomplete="street-address" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์" required></textarea></label>
+            <label class="field"><span>หมายเหตุถึงร้าน (ถ้ามี)</span><input type="text" name="note" placeholder="เช่น ไม่เผ็ด / ไม่ใส่ผักชี" /></label>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend>วิธีชำระเงิน <span class="tag-demo">สาธิต</span></legend>
+            <label class="pay"><input type="radio" name="pay" value="cod" checked /><span class="pay__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 9.5h.01M18 14.5h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span><strong>เก็บเงินปลายทาง (COD)</strong><small>จ่ายกับคนส่งเมื่อได้รับอาหาร</small></span></label>
+            <label class="pay"><input type="radio" name="pay" value="promptpay" /><span class="pay__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="14" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14 14.5h2.5V17M20 14v6M14.5 20H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>พร้อมเพย์ QR</strong><small>สาธิต</small></span></label>
+          </fieldset>
+        </form>
+      </div>
+
+      <div data-checkout-step="success" hidden>
+        <div class="success">
+          <div class="success__badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h2>สั่งอาหารสำเร็จ</h2>
+          <p data-success-msg>ร้านกำลังเตรียมอาหารให้คุณ</p>
+          <div class="success__order">
+            <div><span>เลขที่ออเดอร์</span><strong data-order-no>#EAT-000000</strong></div>
+            <div><span>ยอดชำระ</span><strong data-order-total>฿0</strong></div>
+            <div><span>เวลาส่งโดยประมาณ</span><strong data-order-eta>30–40 นาที</strong></div>
+          </div>
+          <p class="success__note">(นี่คือการจำลอง — ไม่มีการเรียกเก็บเงินและจะไม่มีการจัดส่งจริง)</p>
+          <button class="btn btn--block btn--lg" type="button" data-close-checkout>สั่งเมนูอื่นต่อ</button>
+        </div>
+      </div>
+
+      <div class="modal__foot" data-checkout-foot>
+        <div class="cart__row cart__row--total"><span>รวมทั้งหมด</span><strong data-co-total>฿0</strong></div>
+        <button class="btn btn--block btn--lg" type="submit" form="" data-place-order>ยืนยันสั่งอาหาร</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dish detail modal (with reviews) -->
+  <div class="modal" data-dish-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="dish-title">
+    <div class="modal__backdrop" data-close-dish></div>
+    <div class="modal__card detail" data-dish-content></div>
+  </div>
+
+  <div class="toast" data-toast aria-live="polite" hidden></div>
+  <div class="confetti" data-confetti aria-hidden="true"></div>
+</body>
+</html>

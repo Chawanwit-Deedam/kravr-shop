@@ -173,6 +173,9 @@ svg { display: block; }
 .footer__brand { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
 .footer__brand svg { width: 18px; height: 18px; }
 .footer__fine { font-size: 0.82rem; max-width: 620px; margin: 8px auto; }
+.footer__link { color: var(--accent); font-weight: 500; }
+.footer__link:hover { text-decoration: underline; }
+.nav-link { text-decoration: none; }
 
 /* Scrim */
 .scrim { position: fixed; inset: 0; background: rgba(20, 16, 24, 0.5); backdrop-filter: blur(2px); z-index: 100; opacity: 0; transition: opacity 0.3s; }

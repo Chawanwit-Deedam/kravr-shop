@@ -1,0 +1,70 @@
+/* =========================================================
+   Kravr Eats — food ordering (extends styles.css)
+   Warm accent to set it apart from the shop.
+   ========================================================= */
+:root {
+  --accent: #e8590c; --accent-2: #fd7e14; --accent-soft: #fff1e6; --star: #f08c00;
+}
+:root[data-theme="dark"] {
+  --accent: #ff922b; --accent-2: #ffa94d; --accent-soft: rgba(255,146,43,0.15);
+}
+
+/* Brand */
+.brand__mark--eats { background: var(--accent); }
+:root[data-theme="dark"] .brand__mark--eats { background: var(--surface-2); color: var(--accent); }
+.brand__eats { color: var(--accent); }
+
+/* Nav link (to shop) */
+.nav-link { text-decoration: none; }
+
+/* Hero (warm) */
+.hero__text--eats { background: linear-gradient(120deg, #fff1e6 0%, #ffe8d6 55%, #ffe3e0 100%); }
+:root[data-theme="dark"] .hero__text--eats { background: linear-gradient(120deg, #2a1e17, #291b16 60%, #2a1720); }
+.hero__art--eats .ha-bag { fill: none; stroke: var(--accent); opacity: 0.5; }
+.hero__art--eats .ha-ring { stroke: var(--accent); }
+.hero__art--eats .ha-disc { fill: var(--accent); }
+
+/* Dish card extras (reuses .product) */
+.product__meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; color: var(--mute); }
+.product__cat { background: var(--accent-soft); color: var(--accent); font-weight: 600; padding: 2px 9px; border-radius: 999px; font-size: 0.72rem; }
+.product__reviews { color: var(--mute); font-size: 0.76rem; margin-left: 2px; }
+
+/* Dish detail */
+.dish__area { color: var(--mute); font-size: 0.85rem; margin-top: 12px; }
+.dish__ings { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 16px; }
+.dish__ing { background: var(--surface-2); color: var(--dim); font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; }
+.dish__desc { color: var(--dim); font-size: 0.92rem; line-height: 1.75; margin-bottom: 16px; max-height: 8.2em; overflow: hidden; }
+
+/* Reviews */
+.dish-reviews { border-top: 1px solid var(--line); padding: 22px 26px 26px; }
+.dish-reviews__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.dish-reviews__head h3 { font-size: 1.1rem; }
+.dish-reviews__avg { display: inline-flex; align-items: center; gap: 8px; }
+.dish-reviews__avg .stars svg { width: 16px; height: 16px; }
+.dish-reviews__avg strong { font-family: var(--font-head); font-size: 1.05rem; }
+.dish-reviews__avg span { color: var(--mute); font-size: 0.82rem; }
+.review-list { display: grid; gap: 14px; margin: 16px 0 20px; }
+.review { display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+.review__ava { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--font-head); font-weight: 700; }
+.review__top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.review__name { font-family: var(--font-head); font-weight: 600; font-size: 0.92rem; }
+.review__date { color: var(--mute); font-size: 0.76rem; margin-left: auto; }
+.review .stars svg { width: 13px; height: 13px; }
+.review__text { color: var(--dim); font-size: 0.9rem; line-height: 1.6; margin-top: 3px; }
+.review--mine { background: var(--accent-soft); border-radius: 12px; padding: 12px; margin: 0 -12px; }
+
+/* Write a review */
+.review-form { background: var(--surface-2); border-radius: 16px; padding: 16px; }
+.review-form__t { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; }
+.stars-input { display: inline-flex; gap: 4px; margin-bottom: 12px; }
+.stars-input button { border: 0; background: transparent; padding: 2px; cursor: pointer; color: var(--line); line-height: 0; transition: transform 0.1s; }
+.stars-input button svg { width: 26px; height: 26px; }
+.stars-input button.on { color: var(--star); }
+.stars-input button:hover { transform: scale(1.15); }
+.review-form .field { margin-bottom: 10px; }
+.review-form textarea { min-height: 68px; }
+.review-form__err { color: var(--accent); font-size: 0.82rem; margin-bottom: 10px; }
+
+@media (max-width: 640px) {
+  .dish-reviews { padding: 20px 18px 22px; }
+}
