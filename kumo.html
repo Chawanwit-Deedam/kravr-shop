@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' https://cdnjs.cloudflare.com;
+                 style-src 'self' https://fonts.googleapis.com 'sha256-Ji1UslKBIeFAUjRU+6GY3Yak5Q/PdBpmBS4zdshiGfY=' 'sha256-94IHAwqZOHPP2ykTpic3GQDxOYct6jCHc4tEHx0JMi0=';
+                 font-src https://fonts.gstatic.com;
+                 img-src 'self' data: https://images.unsplash.com;
+                 connect-src 'self';
+                 base-uri 'self';
+                 form-action 'self';
+                 object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#eef0e2" />
+
+  <title>Kumo — Ceremonial Matcha, reimagined</title>
+  <meta name="description" content="Kumo — an interactive matcha landing page. Cloud-soft ceremonial matcha, explored through motion. (Demo / showcase built with GSAP.)" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="kumo.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="kumo.js" defer></script>
+</head>
+<body>
+  <div class="demo-tag">Demo / showcase · GSAP · <a href="home.html">← Kravr</a></div>
+
+  <header class="ku-nav" data-nav>
+    <a class="ku-logo" href="#top" aria-label="Kumo home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15a4 4 0 0 1 .6-7.95A5 5 0 0 1 17 7.5a3.5 3.5 0 0 1-.5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 6c1.6 1.2 1.6 3.8 0 6-1.6-2.2-1.6-4.8 0-6Z" fill="currentColor"/></svg>
+      <span>Kumo</span>
+    </a>
+    <nav class="ku-nav__links">
+      <a href="#flavors">Flavors</a>
+      <a href="#inside">Inside</a>
+      <a href="#ritual">Ritual</a>
+    </nav>
+    <a class="ku-btn ku-btn--sm" href="#shop">Order now</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" data-hero>
+      <div class="hero__aura" data-aura></div>
+      <p class="hero__eyebrow" data-hero-el>雲 · CEREMONIAL GRADE</p>
+      <h1 class="hero__title">
+        <span class="line" data-hero-line>Cloud-soft</span>
+        <span class="line line--accent" data-hero-line>matcha,</span>
+        <span class="line" data-hero-line>reimagined.</span>
+      </h1>
+
+      <div class="stage" data-stage>
+        <!-- floating flavor cards -->
+        <button class="fcard fcard--1" data-flavor="original" data-color="#5f7f3a" data-foam="#e7ecd2">
+          <span class="fcard__dot"></span>
+          <span class="fcard__name">Original</span>
+          <span class="fcard__note">Grassy · umami</span>
+        </button>
+        <button class="fcard fcard--2" data-flavor="vanilla" data-color="#7ea25a" data-foam="#f3efdc">
+          <span class="fcard__dot"></span>
+          <span class="fcard__name">Vanilla Cloud</span>
+          <span class="fcard__note">Sweet · creamy</span>
+        </button>
+        <button class="fcard fcard--3" data-flavor="yuzu" data-color="#a9c247" data-foam="#f0f0cf">
+          <span class="fcard__dot"></span>
+          <span class="fcard__name">Yuzu Zest</span>
+          <span class="fcard__note">Citrus · bright</span>
+        </button>
+        <button class="fcard fcard--4" data-flavor="ceremonial" data-color="#3f5a2c" data-foam="#dfe6cb">
+          <span class="fcard__dot"></span>
+          <span class="fcard__name">Ceremonial</span>
+          <span class="fcard__note">Pure · intense</span>
+        </button>
+
+        <!-- one real cup — the drink inside re-tints per flavour -->
+        <div class="product" data-product>
+          <img class="product__img" data-pimg alt="Iced ceremonial matcha latte in a tall glass" decoding="async"
+               src="https://images.unsplash.com/photo-1749280447307-31a68eb38673?w=760&q=80&auto=format&fit=crop" />
+          <span class="product__tint" data-tint aria-hidden="true"></span>
+          <span class="product__sheen" aria-hidden="true"></span>
+          <span class="product__badge" data-product-badge>Original</span>
+        </div>
+
+        <!-- readout for the selected flavor -->
+        <div class="readout" data-readout>
+          <p class="readout__name" data-readout-name>Original</p>
+          <p class="readout__desc" data-readout-desc>Stone-ground ceremonial matcha. Grassy, deeply umami, no bitterness.</p>
+        </div>
+      </div>
+
+      <div class="hero__cue" data-hero-el><span></span>scroll to explore</div>
+    </section>
+
+    <!-- FLAVOR STRIP -->
+    <section class="flavors" id="flavors">
+      <p class="sec-eyebrow" data-reveal>PICK YOUR MOOD</p>
+      <h2 class="sec-title" data-reveal>Four clouds, one ritual</h2>
+      <p class="sec-lead" data-reveal>Tap a card above to pour a new flavor — the cup, foam, and story shift in real time.</p>
+    </section>
+
+    <!-- INSIDE -->
+    <section class="inside" id="inside">
+      <div class="inside__head">
+        <p class="sec-eyebrow" data-reveal>INSIDE EVERY CUP</p>
+        <h2 class="sec-title" data-reveal>Nothing hidden,<br />nothing wasted</h2>
+      </div>
+      <div class="ing-grid">
+        <article class="ing" data-reveal>
+          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12c0-4 3-7.5 8-8 0 4-3 7.5-8 8Z"/><path d="M12 15C11 12 8 9.5 4 9.5c1 3.5 4 5.5 8 5.5Z"/></svg></span>
+          <h3>Single-origin</h3><p>First-harvest leaves from Uji, Kyoto — shaded 20+ days for deep chlorophyll.</p></article>
+        <article class="ing" data-reveal>
+          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg></span>
+          <h3>Stone-ground</h3><p>Milled slow on granite so the powder stays cool, fine, and vividly green.</p></article>
+        <article class="ing" data-reveal>
+          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h11a3 3 0 0 1 0 6h-1"/><path d="M6 9v7a3 3 0 0 0 3 3h5a3 3 0 0 0 3-3V9Z"/><path d="M9 3v2.5M12 2.5v3M15 3v2.5"/></svg></span>
+          <h3>Oat-forward</h3><p>Barista oat milk for a silky cloud that never fights the tea.</p></article>
+        <article class="ing" data-reveal>
+          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5.5 6.3 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.3 12 3 12 3Z"/><path d="M10 13a2 2 0 0 0 2 2"/></svg></span>
+          <h3>Lightly sweet</h3><p>A whisper of wildflower honey. You taste matcha first, always.</p></article>
+      </div>
+    </section>
+
+    <!-- RITUAL -->
+    <section class="ritual" id="ritual">
+      <div class="ritual__intro">
+        <p class="sec-eyebrow" data-reveal>THE RITUAL</p>
+        <h2 class="sec-title" data-reveal>Three slow steps</h2>
+        <p class="sec-lead" data-reveal>Not a transaction — a small ceremony you repeat every morning.</p>
+      </div>
+      <ol class="steps">
+        <li class="step" data-step><span class="step__no">01</span><h3>Sift</h3><p>Break the clumps so every bit of powder can bloom.</p></li>
+        <li class="step" data-step><span class="step__no">02</span><h3>Whisk</h3><p>Zig-zag until a jade foam rises — that's the cloud.</p></li>
+        <li class="step" data-step><span class="step__no">03</span><h3>Pour</h3><p>Cold oat milk over ice, then the matcha, slow.</p></li>
+      </ol>
+    </section>
+
+    <!-- SHOP CTA -->
+    <section class="shop" id="shop">
+      <div class="shop__card" data-reveal>
+        <div class="shop__glass"><img class="shop__img" alt="Whisking ceremonial matcha in a bowl" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1624893464636-c122891445c6?w=680&q=80&auto=format&fit=crop" /></div>
+        <div class="shop__body">
+          <p class="sec-eyebrow">STARTER RITUAL KIT</p>
+          <h2 class="sec-title">Your first cloud</h2>
+          <p class="sec-lead">30 servings of ceremonial matcha, a bamboo whisk, and a sifter. Everything to start the ritual.</p>
+          <div class="shop__buy">
+            <span class="shop__price">$42<small>/kit</small></span>
+            <button class="ku-btn" type="button" data-buy>Add to cart</button>
+          </div>
+          <p class="shop__note">Demo only — no checkout, no payment.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ku-foot">
+    <div class="ku-logo ku-logo--foot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15a4 4 0 0 1 .6-7.95A5 5 0 0 1 17 7.5a3.5 3.5 0 0 1-.5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Kumo</span></div>
+    <p>Cloud-soft matcha, delivered slow.</p>
+    <p class="ku-foot__fine">Showcase demo built with GSAP + ScrollTrigger · design inspired by “Kumo” by Kris Anfalova · not affiliated · <a href="home.html">back to Kravr</a></p>
+  </footer>
+
+  <div class="toast" data-toast hidden></div>
+</body>
+</html>
