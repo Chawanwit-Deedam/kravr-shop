@@ -64,30 +64,6 @@
       </div>
 
       <div class="stage" data-stage>
-        <!-- LEFT menu rail (scrollable) -->
-        <div class="menu menu--left" data-menu>
-          <button class="fcard is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f">
-            <span class="fcard__thumb"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Matcha</span><span class="fcard__note">matcha · oat milk</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="greentea" data-color="#7fa15a">
-            <span class="fcard__thumb"><img src="kumo-cup-matcha.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Green Tea</span><span class="fcard__note">sencha · ice</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28">
-            <span class="fcard__thumb"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Americano</span><span class="fcard__note">espresso · water</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="coldbrew" data-color="#3f2f22">
-            <span class="fcard__thumb"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Cold Brew</span><span class="fcard__note">18h steep</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72">
-            <span class="fcard__thumb"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Lemon Soda</span><span class="fcard__note">lemon · soda</span></span>
-          </button>
-        </div>
-
         <!-- same cup, the drink changes — real photos cross-fade, or a custom SVG -->
         <div class="product" data-product data-view="photo">
           <div class="product__photo">
@@ -133,32 +109,28 @@
           </div>
           <span class="product__badge" data-product-badge>Iced Matcha Latte</span>
         </div>
-
-        <!-- RIGHT menu rail (scrollable) -->
-        <div class="menu menu--right" data-menu>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e">
-            <span class="fcard__thumb"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Latte</span><span class="fcard__note">espresso · oat</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="oatlatte" data-color="#c6a274">
-            <span class="fcard__thumb"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Oat Latte</span><span class="fcard__note">oat · silky</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34">
-            <span class="fcard__thumb"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Chocolate</span><span class="fcard__note">cocoa · milk</span></span>
-          </button>
-          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="mocha" data-color="#5e3b2a">
-            <span class="fcard__thumb"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span>
-            <span class="fcard__txt"><span class="fcard__name">Mocha</span><span class="fcard__note">espresso · cocoa</span></span>
-          </button>
-        </div>
       </div>
 
       <!-- readout for the selected drink -->
       <div class="readout" data-readout>
         <p class="readout__name" data-readout-name>Iced Matcha Latte</p>
         <p class="readout__desc" data-readout-desc>Stone-ground ceremonial matcha over cold oat milk. Grassy, vivid, quietly sweet.</p>
+      </div>
+
+      <!-- drink carousel — scroll horizontally; the drink locked at the centre is selected -->
+      <div class="carousel-wrap">
+        <div class="carousel" data-carousel role="tablist" aria-label="Choose a drink — scroll, the centre one is selected">
+          <button class="dchip is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f"><span class="dchip__img"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span><span class="dchip__name">Matcha</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="greentea" data-color="#7fa15a"><span class="dchip__img"><img src="kumo-cup-matcha.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Green Tea</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28"><span class="dchip__img"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Americano</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="coldbrew" data-color="#3f2f22"><span class="dchip__img"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Cold Brew</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e"><span class="dchip__img"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Latte</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="oatlatte" data-color="#c6a274"><span class="dchip__img"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Oat Latte</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34"><span class="dchip__img"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Chocolate</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="mocha" data-color="#5e3b2a"><span class="dchip__img"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Mocha</span></button>
+          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72"><span class="dchip__img"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Lemon Soda</span></button>
+        </div>
+        <span class="carousel__lock" aria-hidden="true"></span>
       </div>
 
       <div class="hero__cue" data-hero-el><span></span>scroll to explore</div>

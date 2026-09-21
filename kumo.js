@@ -25,7 +25,8 @@
     mocha: { name: "Iced Mocha", desc: "Espresso, dark chocolate, and cold milk in balance." },
   };
 
-  const cards = $$(".fcard");
+  const chips = $$(".dchip");
+  const carousel = $("[data-carousel]");
   const imgs = $$(".product__img");
   const pimgs = {}; imgs.forEach((im) => { pimgs[im.dataset.pimg] = im; });
   const nameEl = $("[data-readout-name]");
@@ -35,9 +36,10 @@
   const svgFoam = $$(".product__svg .kcup__foam");
 
   /* ---------- Drink switching: same cup, the photo cross-fades ---------- */
-  function selectFlavor(card) {
-    cards.forEach((c) => { const on = c === card; c.classList.toggle("is-active", on); c.setAttribute("aria-selected", String(on)); });
-    const { color, flavor } = card.dataset;
+  function selectFlavor(chip) {
+    if (!chip) return;
+    chips.forEach((c) => { const on = c === chip; c.classList.toggle("is-active", on); c.setAttribute("aria-selected", String(on)); });
+    const { color, flavor } = chip.dataset;
     const f = FLAVORS[flavor] || FLAVORS.matcha;
     const next = pimgs[flavor];
     if (next) imgs.forEach((im) => im.classList.toggle("is-active", im === next));
@@ -51,7 +53,29 @@
       });
     } else { nameEl.textContent = f.name; descEl.textContent = f.desc; }
   }
-  cards.forEach((c) => c.addEventListener("click", () => selectFlavor(c)));
+
+  /* ---------- Carousel: scroll → the drink locked at the centre is selected ---------- */
+  function centerChip(chip, smooth) {
+    if (!carousel || !chip) return;
+    const target = chip.offsetLeft - (carousel.clientWidth - chip.clientWidth) / 2;
+    carousel.scrollTo({ left: target, behavior: smooth ? "smooth" : "auto" });
+  }
+  function centeredChip() {
+    const cx = carousel.scrollLeft + carousel.clientWidth / 2;
+    let best = null, bestD = Infinity;
+    chips.forEach((c) => { const cc = c.offsetLeft + c.clientWidth / 2; const d = Math.abs(cc - cx); if (d < bestD) { bestD = d; best = c; } });
+    return best;
+  }
+  if (carousel) {
+    let tid = null;
+    carousel.addEventListener("scroll", () => {
+      clearTimeout(tid);
+      tid = setTimeout(() => { const c = centeredChip(); if (c && !c.classList.contains("is-active")) selectFlavor(c); }, 70);
+    }, { passive: true });
+    // keep the active drink centred once the images/layout settle
+    window.addEventListener("load", () => centerChip($(".dchip.is-active"), false));
+  }
+  chips.forEach((c) => c.addEventListener("click", () => { selectFlavor(c); centerChip(c, true); }));
 
   /* ---------- Photo / Illustration toggle ---------- */
   const productEl = $("[data-product]");
@@ -63,7 +87,7 @@
   /* ---------- Deep links: ?f=latte, ?view=svg ---------- */
   const params = new URLSearchParams(location.search);
   const fParam = params.get("f");
-  if (fParam) { const pre = cards.find((c) => c.dataset.flavor === fParam); if (pre) selectFlavor(pre); }
+  if (fParam) { const pre = chips.find((c) => c.dataset.flavor === fParam); if (pre) { selectFlavor(pre); requestAnimationFrame(() => centerChip(pre, false)); } }
   if (params.get("view") === "svg") { const b = $('[data-view-btn="svg"]'); if (b) b.click(); }
 
   /* ---------- Nav shrink on scroll ---------- */
@@ -105,7 +129,7 @@
     .from(".hero__eyebrow", { opacity: 0, y: 16, duration: 0.7 }, 0.15)
     .from(".hero__tagline", { opacity: 0, y: 14, duration: 0.7 }, 0.3)
     .from(".product", { opacity: 0, scale: 0.7, y: 40, duration: 1.1, ease: "back.out(1.3)" }, "-=0.45")
-    .from(".fcard", { opacity: 0, y: 24, scale: 0.92, duration: 0.6, stagger: 0.08 }, "-=0.7")
+    .from(".dchip", { opacity: 0, duration: 0.5, stagger: 0.05, clearProps: "opacity" }, "-=0.6")
     .from("[data-readout]", { opacity: 0, y: 16, duration: 0.6 }, "-=0.7")
     .from(".hero__cue", { opacity: 0, y: 10, duration: 0.6 }, "-=0.4");
 
