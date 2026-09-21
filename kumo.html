@@ -64,27 +64,21 @@
       </div>
 
       <div class="stage" data-stage>
-        <!-- floating drink menu (Dribbble-style) — pick one, the cup changes -->
-        <button class="fcard fcard--matcha is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f">
-          <span class="fcard__thumb"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span>
-          <span class="fcard__txt"><span class="fcard__name">Matcha</span><span class="fcard__note">matcha · oat milk</span></span>
-        </button>
-        <button class="fcard fcard--latte" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e">
-          <span class="fcard__thumb"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span>
-          <span class="fcard__txt"><span class="fcard__name">Latte</span><span class="fcard__note">espresso · oat</span></span>
-        </button>
-        <button class="fcard fcard--americano" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28">
-          <span class="fcard__thumb"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span>
-          <span class="fcard__txt"><span class="fcard__name">Americano</span><span class="fcard__note">espresso · water</span></span>
-        </button>
-        <button class="fcard fcard--chocolate" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34">
-          <span class="fcard__thumb"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span>
-          <span class="fcard__txt"><span class="fcard__name">Chocolate</span><span class="fcard__note">cocoa · milk</span></span>
-        </button>
-        <button class="fcard fcard--lemon" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72">
-          <span class="fcard__thumb"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span>
-          <span class="fcard__txt"><span class="fcard__name">Lemon Soda</span><span class="fcard__note">lemon · soda</span></span>
-        </button>
+        <!-- LEFT menu rail (scrollable) -->
+        <div class="menu menu--left" data-menu>
+          <button class="fcard is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f">
+            <span class="fcard__thumb"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span>
+            <span class="fcard__txt"><span class="fcard__name">Matcha</span><span class="fcard__note">matcha · oat milk</span></span>
+          </button>
+          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28">
+            <span class="fcard__thumb"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span>
+            <span class="fcard__txt"><span class="fcard__name">Americano</span><span class="fcard__note">espresso · water</span></span>
+          </button>
+          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72">
+            <span class="fcard__thumb"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span>
+            <span class="fcard__txt"><span class="fcard__name">Lemon Soda</span><span class="fcard__note">lemon · soda</span></span>
+          </button>
+        </div>
 
         <!-- same cup, the drink changes — real photos cross-fade, or a custom SVG -->
         <div class="product" data-product data-view="photo">
@@ -126,6 +120,18 @@
             </svg>
           </div>
           <span class="product__badge" data-product-badge>Iced Matcha Latte</span>
+        </div>
+
+        <!-- RIGHT menu rail (scrollable) -->
+        <div class="menu menu--right" data-menu>
+          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e">
+            <span class="fcard__thumb"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span>
+            <span class="fcard__txt"><span class="fcard__name">Latte</span><span class="fcard__note">espresso · oat</span></span>
+          </button>
+          <button class="fcard" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34">
+            <span class="fcard__thumb"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span>
+            <span class="fcard__txt"><span class="fcard__name">Chocolate</span><span class="fcard__note">cocoa · milk</span></span>
+          </button>
         </div>
       </div>
 

@@ -108,19 +108,17 @@
   // Desktop cup tilt parallax
   const mm = gsap.matchMedia();
   mm.add("(min-width: 821px)", () => {
-    const floats = cards.map((c) => gsap.to(c, { y: "+=14", duration: 3 + Math.random(), ease: "sine.inOut", repeat: -1, yoyo: true, delay: Math.random() }));
     const stage = $("[data-stage]");
     const move = (e) => {
       const r = stage.getBoundingClientRect();
       const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
       const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
-      gsap.to(".product", { rotationY: dx * 12, rotationX: -dy * 9, x: dx * 14, duration: 0.6, ease: "power3.out", overwrite: "auto", transformPerspective: 900 });
-      gsap.to(cards, { x: -dx * 30, duration: 0.9, ease: "power3.out", overwrite: "auto" });
+      gsap.to(".product", { rotationY: dx * 12, rotationX: -dy * 9, duration: 0.6, ease: "power3.out", overwrite: "auto", transformPerspective: 900 });
     };
-    const reset = () => { gsap.to(".product", { rotationY: 0, rotationX: 0, x: 0, duration: 0.9, ease: "power3.out" }); gsap.to(cards, { x: 0, duration: 0.9 }); };
+    const reset = () => gsap.to(".product", { rotationY: 0, rotationX: 0, duration: 0.9, ease: "power3.out" });
     stage.addEventListener("mousemove", move);
     stage.addEventListener("mouseleave", reset);
-    return () => { floats.forEach((t) => t.kill()); stage.removeEventListener("mousemove", move); stage.removeEventListener("mouseleave", reset); };
+    return () => { stage.removeEventListener("mousemove", move); stage.removeEventListener("mouseleave", reset); };
   });
 
   // Aura drift on scroll
