@@ -51,12 +51,12 @@
     <!-- HERO -->
     <section class="hero" data-hero>
       <div class="hero__aura" data-aura></div>
-      <p class="hero__eyebrow" data-hero-el>雲 · CEREMONIAL GRADE</p>
+      <p class="hero__eyebrow" data-hero-el>雲 · SLOW CAFÉ</p>
       <h1 class="hero__title">
-        <span class="line" data-hero-line>Cloud-soft</span>
-        <span class="line line--accent" data-hero-line>matcha,</span>
-        <span class="line" data-hero-line>reimagined.</span>
+        <span class="line" data-hero-line>One cup,</span>
+        <span class="line line--accent" data-hero-line>every mood.</span>
       </h1>
+      <p class="hero__tagline" data-hero-el>The cup stays the same — tap a drink and watch it change.</p>
 
       <div class="view-toggle" data-view-toggle role="tablist" aria-label="เลือกรูปแบบสินค้า">
         <button type="button" data-view-btn="photo" class="is-on" role="tab" aria-selected="true">Photo</button>
@@ -64,35 +64,14 @@
       </div>
 
       <div class="stage" data-stage>
-        <!-- floating flavor cards -->
-        <button class="fcard fcard--1" data-flavor="original" data-color="#5f7f3a" data-foam="#e7ecd2">
-          <span class="fcard__dot"></span>
-          <span class="fcard__name">Original</span>
-          <span class="fcard__note">Grassy · umami</span>
-        </button>
-        <button class="fcard fcard--2" data-flavor="vanilla" data-color="#7ea25a" data-foam="#f3efdc">
-          <span class="fcard__dot"></span>
-          <span class="fcard__name">Vanilla Cloud</span>
-          <span class="fcard__note">Sweet · creamy</span>
-        </button>
-        <button class="fcard fcard--3" data-flavor="yuzu" data-color="#a9c247" data-foam="#f0f0cf">
-          <span class="fcard__dot"></span>
-          <span class="fcard__name">Yuzu Zest</span>
-          <span class="fcard__note">Citrus · bright</span>
-        </button>
-        <button class="fcard fcard--4" data-flavor="ceremonial" data-color="#3f5a2c" data-foam="#dfe6cb">
-          <span class="fcard__dot"></span>
-          <span class="fcard__name">Ceremonial</span>
-          <span class="fcard__note">Pure · intense</span>
-        </button>
-
-        <!-- same cup, the drink re-tints per flavour — Photo or custom SVG -->
+        <!-- same cup, the drink changes — real photos cross-fade, or a custom SVG -->
         <div class="product" data-product data-view="photo">
           <div class="product__photo">
-            <img class="product__img" data-pimg alt="Iced ceremonial matcha latte in a tall glass" decoding="async"
-                 src="https://images.unsplash.com/photo-1749280447307-31a68eb38673?w=760&q=80&auto=format&fit=crop" />
-            <span class="product__tint" data-tint aria-hidden="true"></span>
-            <span class="product__sheen" aria-hidden="true"></span>
+            <img class="product__img is-active" data-pimg="matcha" alt="Iced matcha latte in a clear cup" decoding="async" src="kumo-cup-matcha.jpg" />
+            <img class="product__img" data-pimg="latte" alt="Iced latte in a clear cup" decoding="async" loading="lazy" src="kumo-cup-latte.jpg" />
+            <img class="product__img" data-pimg="americano" alt="Iced americano in a clear cup" decoding="async" loading="lazy" src="kumo-cup-americano.jpg" />
+            <img class="product__img" data-pimg="chocolate" alt="Iced chocolate in a clear cup" decoding="async" loading="lazy" src="kumo-cup-chocolate.jpg" />
+            <img class="product__img" data-pimg="lemon" alt="Iced lemon soda in a clear cup" decoding="async" loading="lazy" src="kumo-cup-lemon.jpg" />
           </div>
           <div class="product__svg" aria-hidden="true">
             <svg viewBox="0 0 240 300" class="kcup" xmlns="http://www.w3.org/2000/svg">
@@ -124,14 +103,33 @@
               <path class="kcup__leaf" d="M120 71q9-17 30-16-4 16-22 18-6 0-8-2z" fill="#5f7f3a" opacity="0.92" />
             </svg>
           </div>
-          <span class="product__badge" data-product-badge>Original</span>
+          <span class="product__badge" data-product-badge>Iced Matcha Latte</span>
         </div>
 
-        <!-- readout for the selected flavor -->
+        <!-- readout for the selected drink -->
         <div class="readout" data-readout>
-          <p class="readout__name" data-readout-name>Original</p>
-          <p class="readout__desc" data-readout-desc>Stone-ground ceremonial matcha. Grassy, deeply umami, no bitterness.</p>
+          <p class="readout__name" data-readout-name>Iced Matcha Latte</p>
+          <p class="readout__desc" data-readout-desc>Stone-ground ceremonial matcha over cold oat milk. Grassy, vivid, quietly sweet.</p>
         </div>
+      </div>
+
+      <!-- drink selector (same cup, different menu) -->
+      <div class="flavor-row" data-flavor-row role="tablist" aria-label="Choose a drink">
+        <button class="fchip is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f">
+          <span class="fchip__img"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span><span class="fchip__name">Matcha</span>
+        </button>
+        <button class="fchip" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e">
+          <span class="fchip__img"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span><span class="fchip__name">Latte</span>
+        </button>
+        <button class="fchip" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28">
+          <span class="fchip__img"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span><span class="fchip__name">Americano</span>
+        </button>
+        <button class="fchip" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34">
+          <span class="fchip__img"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span><span class="fchip__name">Chocolate</span>
+        </button>
+        <button class="fchip" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72">
+          <span class="fchip__img"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span><span class="fchip__name">Lemon Soda</span>
+        </button>
       </div>
 
       <div class="hero__cue" data-hero-el><span></span>scroll to explore</div>
@@ -140,8 +138,8 @@
     <!-- FLAVOR STRIP -->
     <section class="flavors" id="flavors">
       <p class="sec-eyebrow" data-reveal>PICK YOUR MOOD</p>
-      <h2 class="sec-title" data-reveal>Four clouds, one ritual</h2>
-      <p class="sec-lead" data-reveal>Tap a card above to pour a new flavor — the cup, foam, and story shift in real time.</p>
+      <h2 class="sec-title" data-reveal>One cup, five moods</h2>
+      <p class="sec-lead" data-reveal>Tap any drink above — the cup stays exactly the same while the menu inside changes in real time.</p>
     </section>
 
     <!-- INSIDE -->
