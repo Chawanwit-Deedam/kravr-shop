@@ -55,8 +55,8 @@ img, svg { display: block; max-width: 100%; }
 .hero__title .line--accent { font-style: italic; color: var(--matcha); }
 
 .hero__tagline { position: relative; z-index: 2; color: var(--dim); font-size: 1.05rem; margin: 12px auto 0; max-width: 34ch; }
-.stage { position: relative; width: min(680px, 100%); margin: 20px auto 0; display: grid; place-items: center; z-index: 2; }
-.product { position: relative; width: min(232px, 62vw); aspect-ratio: 307 / 600; z-index: 3; will-change: transform; border-radius: 26px; overflow: hidden; background: var(--matcha-deep); box-shadow: 0 40px 70px -30px rgba(40, 55, 25, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.4); }
+.stage { position: relative; width: min(820px, 100%); height: 540px; margin: 24px auto 0; z-index: 2; }
+.product { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(224px, 56vw); aspect-ratio: 307 / 600; z-index: 3; will-change: transform; border-radius: 26px; overflow: hidden; background: var(--matcha-deep); box-shadow: 0 40px 70px -30px rgba(40, 55, 25, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.4); }
 .product__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.55s var(--ease); }
 .product__img.is-active { opacity: 1; }
 .product__tint { position: absolute; inset: 0; mix-blend-mode: color; opacity: 0.38; pointer-events: none; }
@@ -73,14 +73,20 @@ img, svg { display: block; max-width: 100%; }
 .view-toggle button { border: 0; background: transparent; font-family: var(--font); font-weight: 500; font-size: 0.85rem; color: var(--dim); padding: 7px 18px; border-radius: 999px; cursor: pointer; transition: background 0.25s, color 0.25s; }
 .view-toggle button.is-on { background: var(--matcha-deep); color: #f3f6e9; }
 
-/* Drink selector (thumbnails) */
-.flavor-row { position: relative; z-index: 2; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 26px auto 0; }
-.fchip { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 10px 10px 12px; cursor: pointer; width: 94px; font-family: var(--font); transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s; }
-.fchip__img { width: 56px; height: 72px; border-radius: 12px; overflow: hidden; background: var(--matcha-deep); }
-.fchip__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.fchip__name { font-family: var(--font-head); font-weight: 600; font-size: 0.86rem; color: var(--ink); }
-.fchip:hover { transform: translateY(-4px); border-color: var(--matcha); box-shadow: var(--shadow); }
-.fchip.is-active { border-color: var(--matcha); box-shadow: 0 0 0 2px var(--matcha), var(--shadow); }
+/* Floating drink menu (Dribbble-style) */
+.fcard { position: absolute; z-index: 4; width: 174px; left: calc(50% + var(--fx)); top: calc(50% + var(--fy)); margin-left: -87px; margin-top: -32px; display: flex; align-items: center; gap: 11px; text-align: left; background: rgba(247, 248, 239, 0.72); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 16px; padding: 8px 12px 8px 8px; box-shadow: var(--shadow); cursor: pointer; font-family: var(--font); transition: box-shadow 0.3s, border-color 0.3s; }
+.fcard__thumb { width: 34px; height: 44px; border-radius: 9px; overflow: hidden; background: var(--matcha-deep); flex: none; }
+.fcard__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fcard__txt { display: flex; flex-direction: column; min-width: 0; }
+.fcard__name { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; color: var(--ink); line-height: 1.15; }
+.fcard__note { font-size: 0.72rem; color: var(--mute); white-space: nowrap; }
+.fcard:hover { border-color: var(--matcha); }
+.fcard.is-active { border-color: var(--matcha); box-shadow: 0 0 0 2px var(--matcha), var(--shadow); }
+.fcard--matcha { --fx: -232px; --fy: -120px; }
+.fcard--americano { --fx: -240px; --fy: -2px; }
+.fcard--lemon { --fx: -232px; --fy: 116px; }
+.fcard--latte { --fx: 218px; --fy: -94px; }
+.fcard--chocolate { --fx: 224px; --fy: 44px; }
 
 .fcard { position: absolute; left: calc(50% + var(--fx)); top: calc(50% + var(--fy)); z-index: 4; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; background: rgba(247, 248, 239, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 16px; padding: 12px 16px; box-shadow: var(--shadow); cursor: pointer; font-family: var(--font); transition: box-shadow 0.3s, border-color 0.3s; }
 .fcard:hover { border-color: var(--matcha); }
@@ -171,12 +177,10 @@ section { position: relative; z-index: 2; }
 @media (max-width: 820px) {
   .ku-nav { top: 22px; padding: 12px 18px; }
   .ku-nav__links { display: none; }
-  .stage { height: auto; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-  .product { width: min(196px, 56vw); }
-  .readout { position: relative; left: auto; bottom: auto; transform: none; order: 3; }
-  .fcard { position: relative; left: auto; top: auto; order: 4; width: 100%; max-width: 320px; flex-direction: row; align-items: center; gap: 12px; }
-  .fcard__dot { margin-bottom: 0; }
-  .fcard__note { margin-left: auto; }
+  .stage { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center; max-width: 440px; }
+  .product { position: relative; left: auto; top: auto; transform: none !important; grid-column: 1 / -1; justify-self: center; width: min(188px, 50vw); margin: 0 auto 8px; order: -1; }
+  .fcard { position: relative; left: auto; top: auto; width: auto; margin: 0; }
+  .fcard__note { white-space: normal; }
 }
 @media (max-width: 600px) {
   .flavors, .inside, .ritual, .shop { padding: 64px 20px; }

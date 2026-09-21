@@ -21,7 +21,7 @@
     lemon: { name: "Iced Lemon Soda", desc: "Sparkling water, fresh lemon, and a bright little lift." },
   };
 
-  const chips = $$(".fchip");
+  const cards = $$(".fcard");
   const imgs = $$(".product__img");
   const pimgs = {}; imgs.forEach((im) => { pimgs[im.dataset.pimg] = im; });
   const nameEl = $("[data-readout-name]");
@@ -31,9 +31,9 @@
   const svgFoam = $$(".product__svg .kcup__foam");
 
   /* ---------- Drink switching: same cup, the photo cross-fades ---------- */
-  function selectFlavor(chip) {
-    chips.forEach((c) => { const on = c === chip; c.classList.toggle("is-active", on); c.setAttribute("aria-selected", String(on)); });
-    const { color, flavor } = chip.dataset;
+  function selectFlavor(card) {
+    cards.forEach((c) => { const on = c === card; c.classList.toggle("is-active", on); c.setAttribute("aria-selected", String(on)); });
+    const { color, flavor } = card.dataset;
     const f = FLAVORS[flavor] || FLAVORS.matcha;
     const next = pimgs[flavor];
     if (next) imgs.forEach((im) => im.classList.toggle("is-active", im === next));
@@ -47,7 +47,7 @@
       });
     } else { nameEl.textContent = f.name; descEl.textContent = f.desc; }
   }
-  chips.forEach((c) => c.addEventListener("click", () => selectFlavor(c)));
+  cards.forEach((c) => c.addEventListener("click", () => selectFlavor(c)));
 
   /* ---------- Photo / Illustration toggle ---------- */
   const productEl = $("[data-product]");
@@ -59,7 +59,7 @@
   /* ---------- Deep links: ?f=latte, ?view=svg ---------- */
   const params = new URLSearchParams(location.search);
   const fParam = params.get("f");
-  if (fParam) { const pre = chips.find((c) => c.dataset.flavor === fParam); if (pre) selectFlavor(pre); }
+  if (fParam) { const pre = cards.find((c) => c.dataset.flavor === fParam); if (pre) selectFlavor(pre); }
   if (params.get("view") === "svg") { const b = $('[data-view-btn="svg"]'); if (b) b.click(); }
 
   /* ---------- Nav shrink on scroll ---------- */
@@ -101,24 +101,26 @@
     .from(".hero__eyebrow", { opacity: 0, y: 16, duration: 0.7 }, 0.15)
     .from(".hero__tagline", { opacity: 0, y: 14, duration: 0.7 }, 0.3)
     .from(".product", { opacity: 0, scale: 0.7, y: 40, duration: 1.1, ease: "back.out(1.3)" }, "-=0.45")
-    .from(".fchip", { opacity: 0, y: 24, duration: 0.6, stagger: 0.08 }, "-=0.6")
+    .from(".fcard", { opacity: 0, y: 24, scale: 0.92, duration: 0.6, stagger: 0.08 }, "-=0.7")
     .from("[data-readout]", { opacity: 0, y: 16, duration: 0.6 }, "-=0.7")
     .from(".hero__cue", { opacity: 0, y: 10, duration: 0.6 }, "-=0.4");
 
   // Desktop cup tilt parallax
   const mm = gsap.matchMedia();
   mm.add("(min-width: 821px)", () => {
+    const floats = cards.map((c) => gsap.to(c, { y: "+=14", duration: 3 + Math.random(), ease: "sine.inOut", repeat: -1, yoyo: true, delay: Math.random() }));
     const stage = $("[data-stage]");
     const move = (e) => {
       const r = stage.getBoundingClientRect();
       const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
       const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
       gsap.to(".product", { rotationY: dx * 12, rotationX: -dy * 9, x: dx * 14, duration: 0.6, ease: "power3.out", overwrite: "auto", transformPerspective: 900 });
+      gsap.to(cards, { x: -dx * 30, duration: 0.9, ease: "power3.out", overwrite: "auto" });
     };
-    const reset = () => gsap.to(".product", { rotationY: 0, rotationX: 0, x: 0, duration: 0.9, ease: "power3.out" });
+    const reset = () => { gsap.to(".product", { rotationY: 0, rotationX: 0, x: 0, duration: 0.9, ease: "power3.out" }); gsap.to(cards, { x: 0, duration: 0.9 }); };
     stage.addEventListener("mousemove", move);
     stage.addEventListener("mouseleave", reset);
-    return () => { stage.removeEventListener("mousemove", move); stage.removeEventListener("mouseleave", reset); };
+    return () => { floats.forEach((t) => t.kill()); stage.removeEventListener("mousemove", move); stage.removeEventListener("mouseleave", reset); };
   });
 
   // Aura drift on scroll
