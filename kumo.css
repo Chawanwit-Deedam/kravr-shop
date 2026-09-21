@@ -59,7 +59,17 @@ img, svg { display: block; max-width: 100%; }
 .product__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: filter; filter: saturate(var(--sat, 1)) hue-rotate(calc(var(--hue, 0) * 1deg)) brightness(var(--bri, 1)); }
 .product__tint { position: absolute; inset: 0; mix-blend-mode: color; opacity: 0.38; pointer-events: none; }
 .product__sheen { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 42%); }
+.product__photo, .product__svg { position: absolute; inset: 0; transition: opacity 0.5s var(--ease); }
+.product__svg { opacity: 0; display: grid; place-items: center; background: radial-gradient(120% 90% at 50% 12%, #f4f6e7, #e1e9cf); }
+.product__svg .kcup { width: 90%; height: auto; filter: drop-shadow(0 16px 20px rgba(50, 60, 30, 0.18)); }
+.kcup__matcha, .kcup__leaf, .kcup__foam { transition: fill 0.5s var(--ease); }
+.product[data-view="svg"] .product__svg { opacity: 1; }
+.product[data-view="svg"] .product__photo { opacity: 0; }
 .product__badge { position: absolute; left: 14px; bottom: 14px; z-index: 2; background: rgba(247, 248, 239, 0.86); backdrop-filter: blur(8px); color: var(--matcha-deep); font-family: var(--font-head); font-weight: 600; font-size: 0.9rem; padding: 7px 15px; border-radius: 999px; box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.4); }
+
+.view-toggle { position: relative; z-index: 3; display: inline-flex; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin: 6px auto 2px; box-shadow: var(--shadow); }
+.view-toggle button { border: 0; background: transparent; font-family: var(--font); font-weight: 500; font-size: 0.85rem; color: var(--dim); padding: 7px 18px; border-radius: 999px; cursor: pointer; transition: background 0.25s, color 0.25s; }
+.view-toggle button.is-on { background: var(--matcha-deep); color: #f3f6e9; }
 
 .fcard { position: absolute; left: calc(50% + var(--fx)); top: calc(50% + var(--fy)); z-index: 4; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; background: rgba(247, 248, 239, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 16px; padding: 12px 16px; box-shadow: var(--shadow); cursor: pointer; font-family: var(--font); transition: box-shadow 0.3s, border-color 0.3s; }
 .fcard:hover { border-color: var(--matcha); }

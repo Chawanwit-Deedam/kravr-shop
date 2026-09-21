@@ -26,6 +26,8 @@
   const badge = $("[data-product-badge]");
   const pimg = $(".product__img");
   const tint = $("[data-tint]");
+  const svgDrink = $$(".product__svg .kcup__matcha, .product__svg .kcup__leaf");
+  const svgFoam = $$(".product__svg .kcup__foam");
 
   // How each flavour re-tints the same cup (filter + colour wash)
   const FILTERS = {
@@ -39,29 +41,32 @@
   if (cards[0]) cards[0].classList.add("is-active");
 
   const num = (v, d) => { const n = parseFloat(v); return isNaN(n) ? d : n; };
-  function applyLook(p, color) {
-    if (!pimg) return;
-    if (hasGsap) {
-      // GSAP 3.12 won't animate bare custom properties, so tween a proxy and write the vars each frame
+  function applyLook(p, color, foam) {
+    // Photo cup: re-tint via filter + colour wash
+    if (pimg && hasGsap) {
       const cur = { hue: num(pimg.style.getPropertyValue("--hue"), 0), sat: num(pimg.style.getPropertyValue("--sat"), 1), bri: num(pimg.style.getPropertyValue("--bri"), 1) };
       gsap.to(cur, {
         hue: p.hue, sat: p.sat, bri: p.bri, duration: 0.7, ease: "power2.out",
         onUpdate() { pimg.style.setProperty("--hue", cur.hue); pimg.style.setProperty("--sat", cur.sat); pimg.style.setProperty("--bri", cur.bri); },
       });
       if (tint) gsap.to(tint, { backgroundColor: color, duration: 0.7, ease: "power2.out" });
-    } else {
+    } else if (pimg) {
       pimg.style.setProperty("--hue", p.hue); pimg.style.setProperty("--sat", p.sat); pimg.style.setProperty("--bri", p.bri);
       if (tint) tint.style.backgroundColor = color;
     }
+    // Custom SVG cup: recolour just the drink (a CSS transition on `fill`
+    // animates it — GSAP won't tween SVG fill reliably from this build)
+    svgDrink.forEach((e) => { e.style.fill = color; });
+    svgFoam.forEach((e) => { e.style.fill = foam; });
   }
 
   /* ---------- Flavour switching: same cup, the drink re-tints ---------- */
   function selectFlavor(card) {
     cards.forEach((c) => c.classList.toggle("is-active", c === card));
-    const { color, flavor } = card.dataset;
+    const { color, foam, flavor } = card.dataset;
     const f = FLAVORS[flavor] || FLAVORS.original;
     if (badge) badge.textContent = f.name;
-    applyLook(FILTERS[flavor] || FILTERS.original, color);
+    applyLook(FILTERS[flavor] || FILTERS.original, color, foam);
     if (hasGsap) {
       gsap.to("[data-readout]", {
         opacity: 0, y: 8, duration: 0.18,
@@ -72,6 +77,16 @@
     }
   }
   cards.forEach((c) => c.addEventListener("click", () => selectFlavor(c)));
+
+  // Photo / Illustration view toggle
+  const productEl = $("[data-product]");
+  $$("[data-view-btn]").forEach((b) => b.addEventListener("click", () => {
+    if (productEl) productEl.setAttribute("data-view", b.dataset.viewBtn);
+    $$("[data-view-btn]").forEach((x) => { const on = x === b; x.classList.toggle("is-on", on); x.setAttribute("aria-selected", String(on)); });
+  }));
+  const vParam = new URLSearchParams(location.search).get("view");
+  if (vParam === "svg") { const b = $('[data-view-btn="svg"]'); if (b) b.click(); }
+
   // Optional deep-link, e.g. ?f=yuzu — preselect a flavour on load
   const fParam = new URLSearchParams(location.search).get("f");
   if (fParam) { const pre = cards.find((c) => c.dataset.flavor === fParam); if (pre) selectFlavor(pre); }
