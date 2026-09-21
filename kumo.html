@@ -16,10 +16,10 @@
                  object-src 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light" />
-  <meta name="theme-color" content="#eef0e2" />
+  <meta name="theme-color" content="#42522a" />
 
-  <title>Kumo — Ceremonial Matcha, reimagined</title>
-  <meta name="description" content="Kumo — an interactive matcha landing page. Cloud-soft ceremonial matcha, explored through motion. (Demo / showcase built with GSAP.)" />
+  <title>Kumo — Choose your matcha tea</title>
+  <meta name="description" content="Kumo — an interactive matcha landing page. Pick a fruit and watch it swirl into the cup. (Demo / showcase built with GSAP.)" />
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,7 +37,7 @@
   <header class="ku-nav" data-nav>
     <a class="ku-logo" href="#top" aria-label="Kumo home">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15a4 4 0 0 1 .6-7.95A5 5 0 0 1 17 7.5a3.5 3.5 0 0 1-.5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 6c1.6 1.2 1.6 3.8 0 6-1.6-2.2-1.6-4.8 0-6Z" fill="currentColor"/></svg>
-      <span>Kumo</span>
+      <span>kumo</span>
     </a>
     <nav class="ku-nav__links">
       <a href="#flavors">Flavors</a>
@@ -50,97 +50,71 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero" data-hero>
-      <div class="hero__aura" data-aura></div>
-      <p class="hero__eyebrow" data-hero-el>雲 · SLOW CAFÉ</p>
-      <h1 class="hero__title">
-        <span class="line" data-hero-line>One cup,</span>
-        <span class="line line--accent" data-hero-line>every mood.</span>
-      </h1>
-      <p class="hero__tagline" data-hero-el>The cup stays the same — tap a drink and watch it change.</p>
-
-      <div class="view-toggle" data-view-toggle role="tablist" aria-label="เลือกรูปแบบสินค้า">
-        <button type="button" data-view-btn="photo" class="is-on" role="tab" aria-selected="true">Photo</button>
-        <button type="button" data-view-btn="svg" role="tab" aria-selected="false">Illustration</button>
-      </div>
+      <p class="hero__eyebrow" data-hero-el>雲 · CEREMONIAL MATCHA</p>
 
       <div class="stage" data-stage>
-        <!-- same cup, the drink changes — real photos cross-fade, or a custom SVG -->
-        <div class="product" data-product data-view="photo">
-          <div class="product__photo">
-            <img class="product__img is-active" data-pimg="matcha" alt="Iced matcha latte in a clear cup" decoding="async" src="kumo-cup-matcha.jpg" />
-            <img class="product__img" data-pimg="latte" alt="Iced latte in a clear cup" decoding="async" loading="lazy" src="kumo-cup-latte.jpg" />
-            <img class="product__img" data-pimg="americano" alt="Iced americano in a clear cup" decoding="async" loading="lazy" src="kumo-cup-americano.jpg" />
-            <img class="product__img" data-pimg="chocolate" alt="Iced chocolate in a clear cup" decoding="async" loading="lazy" src="kumo-cup-chocolate.jpg" />
-            <img class="product__img" data-pimg="lemon" alt="Iced lemon soda in a clear cup" decoding="async" loading="lazy" src="kumo-cup-lemon.jpg" />
-            <img class="product__img" data-pimg="greentea" alt="Iced green tea in a clear cup" decoding="async" loading="lazy" src="kumo-cup-matcha.jpg" />
-            <img class="product__img" data-pimg="coldbrew" alt="Cold brew coffee in a clear cup" decoding="async" loading="lazy" src="kumo-cup-americano.jpg" />
-            <img class="product__img" data-pimg="oatlatte" alt="Oat latte in a clear cup" decoding="async" loading="lazy" src="kumo-cup-latte.jpg" />
-            <img class="product__img" data-pimg="mocha" alt="Iced mocha in a clear cup" decoding="async" loading="lazy" src="kumo-cup-chocolate.jpg" />
+        <div class="hero__glow" data-aura></div>
+
+        <!-- fruit ingredient cards, arced around the cup -->
+        <button class="fruit fruit--1" type="button" data-fruit="raspberry" data-color="#c62b6d" data-label="Raspberry" aria-label="Raspberry matcha">
+          <img src="https://images.unsplash.com/photo-1710528184650-fc75ae862c13?w=200&h=200&q=75&fit=crop" alt="Raspberry" decoding="async" />
+        </button>
+        <button class="fruit fruit--2" type="button" data-fruit="strawberry" data-color="#e0455f" data-label="Strawberry" aria-label="Strawberry matcha">
+          <img src="https://images.unsplash.com/photo-1640958899516-c08a59225611?w=200&h=200&q=75&fit=crop" alt="Strawberry" decoding="async" />
+        </button>
+        <button class="fruit fruit--3" type="button" data-fruit="blueberry" data-color="#5860c8" data-label="Blueberry" aria-label="Blueberry matcha">
+          <img src="https://images.unsplash.com/photo-1708102526138-d5bef38d5498?w=200&h=200&q=75&fit=crop" alt="Blueberry" decoding="async" />
+        </button>
+        <button class="fruit fruit--4" type="button" data-fruit="cranberry" data-color="#b02636" data-label="Cranberry" aria-label="Cranberry matcha">
+          <img src="https://images.unsplash.com/photo-1636054267837-4ea2ff5bc784?w=200&h=200&q=75&fit=crop" alt="Cranberry" decoding="async" />
+        </button>
+
+        <!-- matcha powder mound -->
+        <div class="mound" aria-hidden="true">
+          <svg viewBox="0 0 460 170" preserveAspectRatio="xMidYMax meet">
+            <defs><linearGradient id="moundG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ea94e" /><stop offset="1" stop-color="#4c6127" /></linearGradient></defs>
+            <path d="M0 170 C50 96 96 118 140 78 C176 45 208 30 250 60 C300 96 356 74 460 140 L460 170 Z" fill="url(#moundG)" />
+            <path d="M0 170 C50 96 96 118 140 78 C176 45 208 30 250 60 C300 96 356 74 460 140" fill="none" stroke="#a9c06a" stroke-width="2" opacity="0.5" />
+          </svg>
+        </div>
+
+        <!-- the matcha cup (SVG) — a fruit swirls into it -->
+        <div class="cup" data-cup>
+          <svg viewBox="0 0 200 300" class="cup__svg" aria-hidden="true">
+            <defs>
+              <clipPath id="cupClip"><path d="M50 58h100l-9 202a10 10 0 0 1-10 9H69a10 10 0 0 1-10-9L50 58Z" /></clipPath>
+              <linearGradient id="cupShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5" /><stop offset="0.2" stop-color="#ffffff" stop-opacity="0" /><stop offset="0.84" stop-color="#ffffff" stop-opacity="0" /><stop offset="1" stop-color="#ffffff" stop-opacity="0.3" /></linearGradient>
+            </defs>
+            <g clip-path="url(#cupClip)">
+              <rect x="46" y="58" width="108" height="222" fill="#eef2df" />
+              <rect class="cup__matcha" x="46" y="58" width="108" height="120" fill="#6f9445" />
+              <path class="cup__swirl" d="M46 128c17 15 31 -7 47 6s29 18 61 1v52c-20 13-40 -7-60 4s-34 -3-48 6z" fill="#6f9445" />
+              <ellipse class="cup__foam" cx="100" cy="63" rx="54" ry="8" fill="#eef2df" />
+              <g fill="#ffffff" opacity="0.36"><rect x="70" y="78" width="24" height="24" rx="6" transform="rotate(-12 82 90)" /><rect x="110" y="74" width="22" height="22" rx="6" transform="rotate(10 121 85)" /><rect x="92" y="102" width="20" height="20" rx="5" transform="rotate(6 102 112)" /></g>
+              <rect x="46" y="58" width="108" height="222" fill="url(#cupShine)" />
+            </g>
+            <path d="M50 58h100l-9 202a10 10 0 0 1-10 9H69a10 10 0 0 1-10-9L50 58Z" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="3" stroke-linejoin="round" />
+            <ellipse cx="100" cy="60" rx="50" ry="7" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="2.6" />
+            <rect x="128" y="18" width="11" height="132" rx="5" fill="#eef2df" transform="rotate(13 133 84)" />
+          </svg>
+          <span class="cup__label" data-cup-label>Original</span>
+          <div class="buy">
+            <span class="buy__price" data-price>19.33$</span>
+            <button class="buy__cart" type="button" data-buy aria-label="Add to cart">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l1.6 10.2A2 2 0 0 0 9.6 17h7.5a2 2 0 0 0 2-1.6L20.5 8H7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+            </button>
           </div>
-          <div class="product__svg" aria-hidden="true">
-            <svg viewBox="0 0 240 300" class="kcup" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <clipPath id="kglass"><path d="M64 78q-4 0-3 4l10 176q1 14 14 14h70q13 0 14-14l10-176q1-4-3-4z" /></clipPath>
-                <linearGradient id="kmilk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f0e2" /><stop offset="1" stop-color="#e7d9c1" /></linearGradient>
-                <linearGradient id="kmatchaHi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.3" /><stop offset="1" stop-color="#ffffff" stop-opacity="0" /></linearGradient>
-                <linearGradient id="kshine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55" /><stop offset="0.22" stop-color="#ffffff" stop-opacity="0" /><stop offset="0.86" stop-color="#ffffff" stop-opacity="0" /><stop offset="1" stop-color="#ffffff" stop-opacity="0.28" /></linearGradient>
-              </defs>
-              <ellipse cx="120" cy="288" rx="66" ry="10" fill="#3f5a2c" opacity="0.16" />
-              <g clip-path="url(#kglass)">
-                <rect x="54" y="150" width="132" height="142" fill="url(#kmilk)" />
-                <rect class="kcup__matcha" x="54" y="96" width="132" height="60" fill="#5f7f3a" />
-                <rect x="54" y="96" width="132" height="60" fill="url(#kmatchaHi)" />
-                <path class="kcup__foam" d="M54 102c11 8 22 8 33 0s22-8 33 0 22 8 33 0 22-8 33 0v-10H54z" fill="#e7ecd2" />
-                <ellipse class="kcup__foam" cx="120" cy="93" rx="66" ry="8" fill="#e7ecd2" />
-                <g fill="#ffffff" opacity="0.5">
-                  <rect x="76" y="104" width="27" height="27" rx="6" transform="rotate(-13 89 117)" />
-                  <rect x="120" y="99" width="24" height="24" rx="6" transform="rotate(11 132 111)" />
-                  <rect x="102" y="126" width="22" height="22" rx="5" transform="rotate(6 113 137)" />
-                </g>
-                <rect x="54" y="80" width="132" height="212" fill="url(#kshine)" />
-                <g fill="#ffffff" opacity="0.5"><circle cx="76" cy="205" r="2.6" /><circle cx="88" cy="235" r="2" /><circle cx="162" cy="212" r="2.6" /><circle cx="150" cy="248" r="2" /></g>
-              </g>
-              <rect x="150" y="34" width="13" height="150" rx="6" fill="#dfeacb" transform="rotate(15 156 109)" />
-              <rect x="150" y="34" width="5" height="150" rx="3" fill="#ffffff" opacity="0.4" transform="rotate(15 156 109)" />
-              <path d="M64 78q-4 0-3 4l10 176q1 14 14 14h70q13 0 14-14l10-176q1-4-3-4z" fill="none" stroke="#ffffff" stroke-opacity="0.92" stroke-width="3.5" stroke-linejoin="round" />
-              <ellipse cx="120" cy="80" rx="59" ry="8" fill="none" stroke="#ffffff" stroke-opacity="0.92" stroke-width="3" />
-              <path class="kcup__leaf" d="M120 71q9-17 30-16-4 16-22 18-6 0-8-2z" fill="#5f7f3a" opacity="0.92" />
-            </svg>
-          </div>
-          <span class="product__badge" data-product-badge>Iced Matcha Latte</span>
         </div>
       </div>
 
-      <!-- readout for the selected drink -->
-      <div class="readout" data-readout>
-        <p class="readout__name" data-readout-name>Iced Matcha Latte</p>
-        <p class="readout__desc" data-readout-desc>Stone-ground ceremonial matcha over cold oat milk. Grassy, vivid, quietly sweet.</p>
-      </div>
-
-      <!-- drink carousel — scroll horizontally; the drink locked at the centre is selected -->
-      <div class="carousel-wrap">
-        <div class="carousel" data-carousel role="tablist" aria-label="Choose a drink — scroll, the centre one is selected">
-          <button class="dchip is-active" type="button" role="tab" aria-selected="true" data-flavor="matcha" data-color="#6f8f3f"><span class="dchip__img"><img src="kumo-cup-matcha.jpg" alt="" decoding="async" /></span><span class="dchip__name">Matcha</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="greentea" data-color="#7fa15a"><span class="dchip__img"><img src="kumo-cup-matcha.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Green Tea</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="americano" data-color="#4f3b28"><span class="dchip__img"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Americano</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="coldbrew" data-color="#3f2f22"><span class="dchip__img"><img src="kumo-cup-americano.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Cold Brew</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="latte" data-color="#b98b5e"><span class="dchip__img"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Latte</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="oatlatte" data-color="#c6a274"><span class="dchip__img"><img src="kumo-cup-latte.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Oat Latte</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="chocolate" data-color="#7c4a34"><span class="dchip__img"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Chocolate</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="mocha" data-color="#5e3b2a"><span class="dchip__img"><img src="kumo-cup-chocolate.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Mocha</span></button>
-          <button class="dchip" type="button" role="tab" aria-selected="false" data-flavor="lemon" data-color="#c7cf72"><span class="dchip__img"><img src="kumo-cup-lemon.jpg" alt="" loading="lazy" decoding="async" /></span><span class="dchip__name">Lemon Soda</span></button>
-        </div>
-        <span class="carousel__lock" aria-hidden="true"></span>
-      </div>
-
-      <div class="hero__cue" data-hero-el><span></span>scroll to explore</div>
+      <h1 class="hero__headline"><span data-hero-line>Choose your</span> <span class="italic" data-hero-line>matcha tea</span></h1>
     </section>
 
-    <!-- FLAVOR STRIP -->
+    <!-- FLAVOR NOTE -->
     <section class="flavors" id="flavors">
-      <p class="sec-eyebrow" data-reveal>PICK YOUR MOOD</p>
-      <h2 class="sec-title" data-reveal>One cup, five moods</h2>
-      <p class="sec-lead" data-reveal>Tap any drink above — the cup stays exactly the same while the menu inside changes in real time.</p>
+      <p class="sec-eyebrow" data-reveal>PICK YOUR FRUIT</p>
+      <h2 class="sec-title" data-reveal>One matcha, every berry</h2>
+      <p class="sec-lead" data-reveal>Tap a fruit above and watch it swirl into the cup — raspberry, strawberry, blueberry or cranberry, folded through ceremonial matcha in real time.</p>
     </section>
 
     <!-- INSIDE -->
@@ -157,11 +131,11 @@
           <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg></span>
           <h3>Stone-ground</h3><p>Milled slow on granite so the powder stays cool, fine, and vividly green.</p></article>
         <article class="ing" data-reveal>
+          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5.5 6.3 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.3 12 3 12 3Z"/><path d="M10 13a2 2 0 0 0 2 2"/></svg></span>
+          <h3>Real fruit</h3><p>Cold-pressed berries folded in at the last second — never syrup, never powder.</p></article>
+        <article class="ing" data-reveal>
           <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h11a3 3 0 0 1 0 6h-1"/><path d="M6 9v7a3 3 0 0 0 3 3h5a3 3 0 0 0 3-3V9Z"/><path d="M9 3v2.5M12 2.5v3M15 3v2.5"/></svg></span>
           <h3>Oat-forward</h3><p>Barista oat milk for a silky cloud that never fights the tea.</p></article>
-        <article class="ing" data-reveal>
-          <span class="ing__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5.5 6.3 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.3 12 3 12 3Z"/><path d="M10 13a2 2 0 0 0 2 2"/></svg></span>
-          <h3>Lightly sweet</h3><p>A whisper of wildflower honey. You taste matcha first, always.</p></article>
       </div>
     </section>
 
@@ -175,7 +149,7 @@
       <ol class="steps">
         <li class="step" data-step><span class="step__no">01</span><h3>Sift</h3><p>Break the clumps so every bit of powder can bloom.</p></li>
         <li class="step" data-step><span class="step__no">02</span><h3>Whisk</h3><p>Zig-zag until a jade foam rises — that's the cloud.</p></li>
-        <li class="step" data-step><span class="step__no">03</span><h3>Pour</h3><p>Cold oat milk over ice, then the matcha, slow.</p></li>
+        <li class="step" data-step><span class="step__no">03</span><h3>Swirl</h3><p>Fold the fruit through, pour over ice, and go.</p></li>
       </ol>
     </section>
 
@@ -198,7 +172,7 @@
   </main>
 
   <footer class="ku-foot">
-    <div class="ku-logo ku-logo--foot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15a4 4 0 0 1 .6-7.95A5 5 0 0 1 17 7.5a3.5 3.5 0 0 1-.5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Kumo</span></div>
+    <div class="ku-logo ku-logo--foot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 15a4 4 0 0 1 .6-7.95A5 5 0 0 1 17 7.5a3.5 3.5 0 0 1-.5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>kumo</span></div>
     <p>Cloud-soft matcha, delivered slow.</p>
     <p class="ku-foot__fine">Showcase demo built with GSAP + ScrollTrigger · design inspired by “Kumo” by Kris Anfalova · not affiliated · <a href="home.html">back to Kravr</a></p>
   </footer>
