@@ -19,6 +19,10 @@
     americano: { name: "Iced Americano", desc: "Two shots over ice and water. Clean, bold, nothing to hide." },
     chocolate: { name: "Iced Chocolate", desc: "Dark cocoa folded into cold milk — dessert you can drink." },
     lemon: { name: "Iced Lemon Soda", desc: "Sparkling water, fresh lemon, and a bright little lift." },
+    greentea: { name: "Iced Green Tea", desc: "Cold-steeped sencha — light, clean, gently grassy." },
+    coldbrew: { name: "Cold Brew", desc: "Eighteen-hour steep. Smooth, chocolatey, low in acidity." },
+    oatlatte: { name: "Oat Latte", desc: "Espresso and barista oat milk — extra silky, dairy-free." },
+    mocha: { name: "Iced Mocha", desc: "Espresso, dark chocolate, and cold milk in balance." },
   };
 
   const cards = $$(".fcard");
